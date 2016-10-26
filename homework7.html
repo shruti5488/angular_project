@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Learn!</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/Users/shruti5488/Documents/WEBTECH/itp101/HW7/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+ 
+ 
+</head>
+
+<body>
+<nav class="navbar navbar-default no-margin">
+	<div>
+		<ul class="navbar-header">
+			<li><a id="menu-toggle" href="#"><span id="main_icon" class="fa fa-bars"></span></a></li>
+		</ul>
+	</div>
+</nav>
+
+<div ng-app="myApp" ng-controller="mainController">
+  <ul>
+    <li ng-repeat="x in legs">{{x}}</li>
+  </ul>
+<div id="wrapper" class="active">
+	<div id="sidebar-wrapper">
+		<ul class="sidebar-nav" id="sidebar">
+			<li><a class="tab" href="#" ng-click="ViewLeg()"><span class="sub_icon fa fa-user"></span>Legislators</a></li>
+			<li><a class="tab" href="#bill_show"><span class="sub_icon fa fa fa-file-o"></span>Bills</a></li>
+			<li><a class="tab" href="#committee_show"><span class="sub_icon fa fa-sign-in"></span>Committees</a></li>
+			<li><a class="tab"><span class="sub_icon fa fa fa-star"></span>Favorites</a></li>
+		</ul>
+	</div>
+</div>
+
+	<div id="page-content-wrapper">
+		<div class="page-content inset">
+			<div class ="container">
+				<h2>Legislator</h2>
+				<div id="legislator_show">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Party</th>
+									<th>Name</th>
+									<th>Chamber</th>
+									<th>District</th>
+									<th>State</th>
+								</tr>
+								<tr ng-repeat="leg in legs">
+									<!-- <td> {{ leg.last_name }} </td>
+									<td> {{ leg.last_name }} </td>
+									<td> {{ leg.chamber }} </td>
+									<td> {{ leg.district }} </td>
+									<td> {{ leg.state }} </td> -->
+								</tr>
+							</thead>
+						</table>
+					</div>
+
+
+				<div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="app.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</body>
+</html>
