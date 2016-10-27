@@ -7,10 +7,10 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
- 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
- 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script> 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script> 
 </head>
 
 <body>
@@ -21,7 +21,6 @@
 		</ul>
 	</div>
 </nav>
-
 <div ng-app='myApp' ng-controller="mainController">
 	<div id="wrapper" class="active">
 		<div id="sidebar-wrapper">
@@ -39,139 +38,150 @@
 			<div class ="container second_container">
 				<h1>Legislators</h1>
 				<hr style="border-color: silver;">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<ul class="nav nav-tabs">
-					    	<li class="active"><a class="no_color" data-toggle="tab" href="#state">By State</a></li>
-					    	<li><a class="no_color" data-toggle="tab" href="#house">House</a></li>
-					    	<li><a class="no_color" data-toggle="tab" href="#senate">Senate</a></li>
-						</ul>
-					</div>
-					<div class="panel panel-default" id="reduce_panel">
-						<div class="tab-content">
-							<div id="state" class="tab-pane fade in active 	table-responsive">
-						
-        								
-											<div class="panel-heading">
-												Legislators By State
-												<select ng-model="boxmodel" class="dropdown">
-													<option value="">All States</option>
-													<option ng-repeat="x in states">{{ x }}</option>
-												</select>
-											</div>
-											<div class="panel-body">
-												<table class="table">
-													<thead>
-														<tr>
-															<th>Party</th>
-															<th>Name</th>
-															<th>Chamber</th>
-															<th>District</th>
-															<th>State</th>
-															<th></th>
-														</tr>
-														<tr ng-repeat="leg in legs"	ng-switch on="leg.chamber">
-															<td class="col-md-2"> 
-																<div ng-switch-when='house'>
-																		<img ng-src="{{ house }}" style="width:12%";> 
-																</div>
-																<div ng-switch-when='senate'>
-																		<img ng-src="{{ senate }}" style="width:12%";> 
-																</div>
-															</td>
-															<td class="col-md-2"> {{ leg.last_name }} , {{ leg.first_name }} </td>
-															<td class="col-md-2"> {{ leg.chamber }} </td>
-															<td class="col-md-2"> {{ leg.district }} </td>
-															<td class="col-md-2"> {{ leg.state_name }} </td>
-															<td class="col-md-2">
-																<div id="ismdb" class="carousel slide" data-interval="false" data-ride="carousel">
-    																<div class="carousel-inner">
-																		<div class="item active">
-        																	<a href="#ismdb" data-custom-slide-to="1" class="btn btn-primary">	View 	details</a>
-        																</div>	<!-- div item active body -->
-        																<div class="item">
-        																	<h3>Second Panel</h3>
-        																	<a href="#ismdb" data-slide-to="0" class="btn btn-primary">	Previous</a>
-        																</div>
-        															</div> 
-																</div> <!-- id=state caraousel div close-->
-															</td>
-														</tr>
-													</thead>
-												</table>
-											</div> <!-- div panel=state body -->
-										
-									
-							</div> <!-- id=state div close-->
-							<div id="house" class="tab-pane fade table-responsive">
-								<div class="panel-heading">
-									<div class ="row">
-										<div class="col-xs-9">Legislators By House</div>
-              							<div class="col-xs-3"><input ng-model="Search_house" id="search" class="form-control" placeholder="Search"></div>
-              						</div>
-								</div>
-								<div class="panel-body">
-										<table class="table">
-											<thead>
-												<tr>
-													<th>Party</th>
-													<th>Name</th>
-													<th>Chamber</th>
-													<th>District</th>
-													<th>State</th>
-													<th></th>
-												</tr>
-												<tr ng-repeat="leg in legs"	ng-switch on="leg.chamber">
-													<td class="col-md-2" ng-switch-when='house'>
-														<img ng-src="{{ house }}" style="width:12%";> 
-													</td>
-													<td class="col-md-2" ng-switch-when='house'> {{ leg.last_name }} , {{ leg.first_name }} </td>
-													<td class="col-md-2" ng-switch-when='house'> {{ leg.chamber }} </td>
-													<td class="col-md-2" ng-switch-when='house'> {{ leg.district }} </td>
-													<td class="col-md-2" ng-switch-when='house'> {{ leg.state_name }} </td>
-													<td class="col-md-2" ng-switch-when='house'></td>
-												</tr>
-											</thead>
-										</table>
-								</div> <!-- div panel=state body -->
-							</div>  <!-- div id=house body -->
-							<div id="senate" class="tab-pane fade table-responsive">
-								<div class="panel-heading">
-									<div class ="row">
-										<div class="col-xs-9">Legislators By Senate</div>
-              							<div class="col-xs-3"><input ng-model="Search_house" id="search" class="form-control" placeholder="Search"></div>
-              						</div>
-								</div>
-								<div class="panel-body">
-									<table class="table">
-										<thead>
-											<tr>
-												<th>Party</th>
-												<th>Name</th>
-												<th>Chamber</th>
-												<th>State</th>
-												<th></th>
-											</tr>
-											<tr ng-repeat="leg in legs"	ng-switch on="leg.chamber">
-												<td class="col-md-2" ng-switch-when='senate'> 
-													<img ng-src="{{ senate }}" style="width:12%";> 
-												</td>
-												<td class="col-md-2" ng-switch-when='senate'> {{ leg.last_name }} , {{leg.first_name }} </td>
-												<td class="col-md-2" ng-switch-when='senate'> {{ leg.chamber }} </td>
-												<td class="col-md-2" ng-switch-when='senate'> {{ leg.state_name }} </td>
-												<td class="col-md-2" ng-switch-when='senate'></td>
-											</tr>
-										</thead>
-									</table>
-								</div> <!-- div panel= body -->
-							</div>  <!-- div id=senate body -->
-						</div> <!--div tab-content close -->
-					</div> <!-- div panel panel-default 2nd close -->
-				</div> <!-- panel panel-default 1st close-->
+				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
+				  <div class="carousel-inner" role="listbox">
+				    <div class="item active">
+				    	<div class="panel panel-default">
+				    		<div class="panel-body">
+				    			<ul class="nav nav-tabs">
+				    		    	<li class="active"><a class="no_color" data-toggle="tab" href="#state">By State</a></li>
+				    		    	<li><a class="no_color" data-toggle="tab" href="#house">House</a></li>
+				    		    	<li><a class="no_color" data-toggle="tab" href="#senate">Senate</a></li>
+				    			</ul>
+				    		</div>
+				    		<div class="panel panel-default" id="reduce_panel">
+				    			<div class="tab-content">
+				    				<div id="state" class="tab-pane fade in active 	table-responsive">
+				    					<div class="panel-heading">
+				    						Legislators By State
+				    						<select ng-model="boxmodel" class="dropdown">
+				    							<option value="">All States</option>
+				    							<option ng-repeat="x in states">{{ x }}</option>
+				    						</select>
+				    					</div>
+				    					<div class="panel-body">
+				    						<table class="table">
+				    							<thead>
+				    								<tr>
+				    									<th>Party</th>
+				    									<th>Name</th>
+				    									<th>Chamber</th>
+				    									<th>District</th>
+				    									<th>State</th>
+				    									<th></th>
+				    								</tr>
+				    								<!-- <tr ng-repeat="leg in legs"	ng-switch on="leg.chamber"> -->
+				    								<!-- <tr dir-paginate-start="leg in legs | itemsPerPage: 10" ng-repeat-start="leg in legs | itemsPerPage: 10" current-page="1" ng-switch on="leg.chamber"> -->
+				    								<tr dir-paginate="leg in legs | itemsPerPage: 10" current-page="1" ng-switch on="leg.chamber">
+				    									<td class="col-md-2"> 
+				    										<div ng-switch-when='house'>
+				    												<img ng-src="{{ party_house }}" style="width:12%";> 
+				    										</div>
+				    										<div ng-switch-when='senate'>
+				    												<img ng-src="{{ party_senate }}" style="width:12%";> 
+				    										</div>
+				    									</td>
+				    									<td class="col-md-3"> {{ leg.last_name }}, {{leg.first_name }} </td>
+				    									<td class="col-md-2"> 
+				    										<div ng-switch-when='house'>
+				    												<img ng-src="{{ house }}" style="width:12%";> {{ leg.chamber }} 
+				    										</div>
+				    										<div ng-switch-when='senate'>
+				    												<img ng-src="{{ senate }}" style="width:12%";> {{ leg.chamber }} 
+				    										</div>
+				    										
+				    									</td>
+				    									<td class="col-md-2"> {{ leg.district }} </td>
+				    									<td class="col-md-2"> {{ leg.state_name }} </td>
+				    									<td class="col-md-2">
+				    										<button class="btn btn-primary" href="#carousel-example-generic" role="button" data-slide="next"> View Details </button>
+				    									</td>
+				    								</tr>
+				    							</thead>
+				    						</table>
+				    					</div> <!-- div panel=state body -->	
+				    				</div> <!-- id=state div close-->
+				    				<div id="house" class="tab-pane fade table-responsive">
+				    					<div class="panel-heading">
+				    						<div class ="row">
+				    							<div class="col-xs-9">Legislators By House</div>
+				    	            					<div class="col-xs-3"><input ng-model="Search_house" id="search" claform-control" placeholder="Search"></div>
+				    	            				</div>
+				    					</div>
+				    					<div class="panel-body">
+				    						<table class="table">
+				    							<thead>
+				    								<tr>
+				    									<th>Party</th>
+				    									<th>Name</th>
+				    									<th>Chamber</th>
+				    									<th>District</th>
+				    									<th>State</th>
+				    									<th></th>
+				    								</tr>
+				    								<tr ng-repeat="leg in legs"	ng-switch on="leg.chamber">
+				    									<td class="col-md-2" ng-switch-when='house'>
+				    										<img ng-src="{{ house }}" style="width:12%";> 
+				    									</td>
+				    									<td class="col-md-2" ng-switch-when='house'> {{ leg.last_name }}, {{ leg.first_name}} </td>
+				    									<td class="col-md-2" ng-switch-when='house'> {{ leg.chamber }} >
+				    									<td class="col-md-2" ng-switch-when='house'> {{ leg.district }td>
+				    									<td class="col-md-2" ng-switch-when='house'> {{ leg.state_name</td>
+				    									<td class="col-md-2" ng-switch-when='house'></td>
+				    								</tr>
+				    							</thead>
+				    						</table>
+				    					</div> <!-- div panel=state body -->
+				    				</div>  <!-- div id=house body -->
+				    				<div id="senate" class="tab-pane fade table-responsive">
+				    					<div class="panel-heading">
+				    						<div class ="row">
+				    							<div class="col-xs-9">Legislators By Senate</div>
+				    	            					<div class="col-xs-3"><input ng-model="Search_house" id="search" claform-control" placeholder="Search"></div>
+				    	            				</div>
+				    					</div>
+				    					<div class="panel-body">
+				    						<table class="table">
+				    							<thead>
+				    								<tr>
+				    									<th>Party</th>
+				    									<th>Name</th>
+				    									<th>Chamber</th>
+				    									<th>State</th>
+				    									<th></th>
+				    								</tr>
+				    								<tr ng-repeat="leg in legs"	ng-switch on="leg.chamber">
+				    									<td class="col-md-2" ng-switch-when='senate'> 
+				    										<img ng-src="{{ senate }}" style="width:12%";> 
+				    									</td>
+				    									<td class="col-md-2" ng-switch-when='senate'> {{ leg.last_name }}, {{leg.first_name }} </td>
+				    									<td class="col-md-2" ng-switch-when='senate'> {{ leg.chamber }} </td>
+				    									<td class="col-md-2" ng-switch-when='senate'> {{ leg.state_name }} >
+				    									<td class="col-md-2" ng-switch-when='senate'></td>
+				    								</tr>
+				    							</thead>
+				    						</table>
+				    					</div> <!-- div panel= body -->
+				    				</div>  <!-- div id=senate body -->
+				    			</div> <!--div tab-content close -->
+				    			<div class="text-center">
+          					<dir-pagination-controls boundary-links="true" template-url="dirPagination.tpl.html" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
+          				</div>
+				    		</div> <!-- div panel panel-default 2nd close -->
+				    	</div> <!-- panel panel-default 1st close-->
+				    </div>
+				    <div class="item">
+				    	<div class="panel panel-default">
+				    			Show something!
+				    	</div>
+				    </div>
+				  </div>
+				</div>
 			</div> <!-- CONTAINER close -->
 		</div>
 	</div>
 </div>
 <script src="app.js"></script>
+<script src="dirPagination.js"></script>
 </body>
 </html>
