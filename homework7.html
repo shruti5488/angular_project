@@ -13,7 +13,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script> 
 </head>
 
-<body>
+<body class="serif">
 <nav class="navbar navbar-default no-margin">
 	<div>
 		<ul class="navbar-header">
@@ -49,7 +49,7 @@
 				    		    	<li><a class="no_color" data-toggle="tab" href="#senate">Senate</a></li>
 				    			</ul>
 				    		</div>
-				    		<div class="panel panel-default" id="reduce_panel">
+				    		<div class="panel panel-default reduce_panel">
 				    			<div class="tab-content">
 				    				<div id="state" class="tab-pane fade in active 	table-responsive">
 				    					<div class="panel-heading">
@@ -94,7 +94,7 @@
 				    									<td class="col-md-2"> {{ leg.district }} </td>
 				    									<td class="col-md-2"> {{ leg.state_name }} </td>
 				    									<td class="col-md-2">
-				    										<button class="btn btn-primary" href="#carousel-example-generic" role="button" data-slide="next"> View Details </button>
+				    										<button class="btn btn-primary" href="#carousel-example-generic" role="button" data-slide="next" ng-click="view_legislator(leg, bills, comms);"> View Details </button>
 				    									</td>
 				    								</tr>
 				    							</thead>
@@ -172,7 +172,94 @@
 				    </div>
 				    <div class="item">
 				    	<div class="panel panel-default">
-				    			Show something!
+				    		<span class="fa fa-chevron-left details_icon"></span>Details<hr>
+				    		<div class="panel-body">
+				    			<div class="col-md-6">
+				    				<div class="table-responsive">
+				    					<table class="table">
+				    						<tbody>
+				    							<tr>
+				    								<td rowspan="6" class="col-md-5"><img ng-src="{{ photo }}" class="legis_image"></td>
+				    								<td style="padding: 5px;"></td>
+				    							</tr>
+				    							<tr>
+				    								<td class="col-md-2" style="padding: 5px;"> {{ detail.title }} {{ detail.last_name}} {{ 	detail.first_name }} </td>
+				    							</tr>
+				    							<tr>
+				    								<td class="row_height" style="padding: 5px;"> {{ detail.oc_email }} </td>
+				    							</tr>
+				    							<tr>
+				    								<td class="row_height" style="padding: 5px;"> Chamber: {{detail.chamber }} </td>
+				    							</tr>
+				    							<tr>
+				    								<td class="row_height" style="padding: 5px;">Contact: {{ detail.phone }} </td>
+				    							</tr>
+				    							<tr>
+				    								<td class="row_height" style="padding: 5px;"> <img ng-src="{{ party_image }}" style="width:12%";> 	{{party_name}} </td>
+				    							</tr>
+				    						</tbody>
+				    						<table class="table">
+				    							<tr>
+				    								<td>Start term</td>
+				    								<td>{{detail.term_start | date}} </td>
+				    							</tr>
+				    							<tr>
+				    								<td>End Term</td>
+				    								<td>{{detail.term_end | date}} </td>
+				    							</tr>
+				    							<tr>
+				    								<td>Term</td>
+				    								<td>
+				    									<div class="progress">
+				    									  <div class="progress-bar" role="progressbar" aria-valuenow="{{ term }}" aria-valuemin="0" 	aria-valuemax="100" style="width:60%;">
+				    									    60%
+				    									  </div>
+				    									</div>
+				    								</td>
+				    							</tr>
+				    							<tr>
+				    								<td class="col-md-2">Office</td>
+				    								<td class="col-md-4">{{detail.office}}</td>
+				    							</tr>
+				    							<tr>
+				    								<td class="col-md-2">State</td>
+				    								<td class="col-md-4"> {{detail.state_name}} </td>
+				    							</tr>
+				    							<tr>
+				    								<td class="col-md-2">Fax</td>
+				    								<td class="col-md-4"> {{detail.fax}} </td>
+				    							</tr>
+				    							<tr>
+				    								<td class="col-md-2">Birthday</td>
+				    								<td class="col-md-4"> {{ detail.birthday | date}}</td>
+				    							</tr>
+				    							<tr>
+				    								<td class="col-md-2">Social Links</td>
+				    								<td class="col-md-4">
+				    										<a href="{{ twitter }}" target="_blank"><img ng-src="http://cs-server.usc.edu:45678/hw/hw8/images/t.png	" style="width:12%";></a>
+				    										<a href="{{ facebook }}" target="_blank"><img ng-src="http://cs-server.usc.edu:45678/hw/hw8/images/	f.png" style="width:12%";></a>
+				    										<a href="{{ website }}" target="_blank"><img ng-src="http://cs-server.usc.edu:45678/hw/hw8/images/w.png	" style="width:12%";></a>
+				    								</td>
+				    							</tr>
+				    						</table>
+				    					</table>
+				    				</div>
+				    			</div>
+				    			<div class="col-md-6">
+				    				Committees
+				    				<div class="table-responsive">
+				    					<table class="table">
+				    						<thead>
+				    							<tr>
+				    								<th>Chamber</th>
+				    								<th>Committee ID</th>
+				    								<th>Name</th>
+				    							</tr>
+				    						</thead>
+				    					</table>
+				    				</div>
+				    			</div>
+				    		</div> <!--- Panel-body div close-->
 				    	</div>
 				    </div>
 				  </div>
