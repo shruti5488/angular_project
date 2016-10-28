@@ -8,9 +8,8 @@ angular.module('myApp', ['angularUtils.directives.dirPagination']).controller('m
                   'North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota',
                   'Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'];
        
-  $scope.pageChangeHandler = function(num) {
-    console.log('going to page ' + num);
-  };
+  $scope.currentPage = 1;
+  $scope.pageSize = 10;
 
     $http({
       method: 'GET',
@@ -20,6 +19,7 @@ angular.module('myApp', ['angularUtils.directives.dirPagination']).controller('m
         var json_bill = JSON.parse(response.data[1]);
         var json_com = JSON.parse(response.data[2]);
         console.log(response);
+        debugger;
         $scope.party_house = "http://cs-server.usc.edu:45678/hw/hw8/images/r.png";
         $scope.party_senate = "http://cs-server.usc.edu:45678/hw/hw8/images/d.png";
         $scope.house = "http://cs-server.usc.edu:45678/hw/hw8/images/h.png";
@@ -35,33 +35,47 @@ angular.module('myApp', ['angularUtils.directives.dirPagination']).controller('m
       $scope.detail = legislator_details;
       console.log(legislator_details);
       console.log(bill_details);
-      var bill = [];
-      var i, j = 0;
-      debugger;
-      // for(i=0; i<bill_details.length ; i++) {
-      //   console.log(bill_details[i].sponsor_id);
-      //     console.log(legislator_details.bioguide_id);
-      //   if (bill_details[i].sponsor_id == "B000711"){
-      //     bill[j][bill_id] = bill_details[i].sponsor_id;
-      //     bill[j][title] = bill_details[i].official_title;
-      //     bill[j][chamber] = bill_details[i].chamber;
-      //     bill[j][bill_type] = bill_details[i].bill_type;
-      //     bill[j][congress] = bill_details[i].congress;
-      //     bill[j][link] = bill_details[i].last_version.urls.pdf;
-      //     j++;
-      //   }
-      //   if (j==5) { }
-      // }
+
       var str = "string";
+      var bioguide_id = legislator_details.bioguide_id;
       $http({
       method: 'POST',
       url: 'logic.php',
       data: {
-        data: str
+        data: str,
+        bioguide_id : bioguide_id
       }
     }).then(function (response) {
-        debugger;
         console.log(response);
+        var json_leg_comm = JSON.parse(response.data[0]);
+        var json_leg_bill = JSON.parse(response.data[1]);
+        var bill = [];
+        var comm = [];
+        var i, j = 0;
+        if (json_leg_comm.count > 0){
+          for(i=0; i<json_leg_comm.count ; i++) {
+            if(j<5) {
+              comm[i] = json_leg_comm.results[i];
+              j++;
+            }
+          }
+        } else {
+          comm[0] = "N.A";
+        }
+
+        j = 0;
+        if (json_leg_bill.count > 0){
+          for(i=0; i<json_leg_bill.count ; i++) {
+            if(j<5) {
+              bill[i] = json_leg_bill.results[i];
+              j++;
+            }
+          }
+        } else {
+          bill[0] = "N.A";
+        }
+        $scope.comms = comm;
+        $scope.bills = bill;
     }, function (response) {
         // code to execute in case of error
     });

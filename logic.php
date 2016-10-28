@@ -3,7 +3,16 @@
 	$data = json_decode(file_get_contents("php://input"));
     
     if($data->data == "string"){
-    	echo "Hello";
+    	// echo "Hello";
+    	$bio = $data->bioguide_id;
+    	$bill = "http://congress.api.sunlightfoundation.com/bills?sponsor_id=".$bio."&apikey=dc64b50ea0094b8794a3a8d96db12f86";
+    	$json_bill = file_get_contents($bill);
+
+    	$committee = "http://congress.api.sunlightfoundation.com/committees?chamber=senate&member_ids=".$bio."&apikey=dc64b50ea0094b8794a3a8d96db12f86";
+    	$json_comm = file_get_contents($committee);
+
+    	$json_string = array($json_comm, $json_bill);
+    	echo json_encode($json_string);
     }
 else{
 

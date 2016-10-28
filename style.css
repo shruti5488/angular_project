@@ -27,8 +27,15 @@
   -o-transition: all 0.4s ease;
   transition: all .4s ease 0s;
 }
+.hr_panel{
+  margin-bottom: 0px;
+  margin-top: 10px;
+}
 .reduce_panel{
   margin: 15px;
+}
+#details_leg{
+  padding-left: 40px;
 }
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover{
   border-bottom-color: #ddd;
@@ -59,7 +66,7 @@ border-color: #ddd;
 }
 .legis_image{
   padding: 0px 10px;
-  width: 100%;
+  width: 90%;
 }
 .row_height{
   padding: 5px;
