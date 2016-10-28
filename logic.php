@@ -1,9 +1,9 @@
 <?php
 
-	// $data = json_decode(file_get_contents("php://input"));
+	$data = json_decode(file_get_contents("php://input"));
     
-    if ($_POST['your_var_key']){
-    	echo $_POST['your_var_key'] ;
+    if($data->data == "string"){
+    	echo "Hello";
     }
 else{
 

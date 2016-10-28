@@ -16,7 +16,6 @@ angular.module('myApp', ['angularUtils.directives.dirPagination']).controller('m
       method: 'GET',
       url: 'logic.php',
     }).then(function (response) {
-      debugger;
         var json_leg = JSON.parse(response.data[0]);
         var json_bill = JSON.parse(response.data[1]);
         var json_com = JSON.parse(response.data[2]);
@@ -53,31 +52,19 @@ angular.module('myApp', ['angularUtils.directives.dirPagination']).controller('m
       //   }
       //   if (j==5) { }
       // }
-    //   var i = "x";
-    //   $http({
-    //   method: 'GET',
-    //   url: 'logic.php',
-    //   data: {
-    //       data: i
-    //   }
-    // }).then(function (response) {
-    //   debugger;
-    //   console.log(response);
-    // }, function (response) {
-    //   debugger;
-    //     // code to execute in case of error
-    // });
-    var your_var = "x";
-    $http.post(logic.php, {your_var_key: your_var}).
-        success(function(data) {
-          // this callback will be called asynchronously
-          // when the response is available
-        }).
-        error(function(data) {
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-        });;
-     debugger;
+      var str = "string";
+      $http({
+      method: 'POST',
+      url: 'logic.php',
+      data: {
+        data: str
+      }
+    }).then(function (response) {
+        debugger;
+        console.log(response);
+    }, function (response) {
+        // code to execute in case of error
+    });
       $scope.photo = "https://theunitedstates.io/images/congress/original/" + legislator_details.bioguide_id + ".jpg";
       $scope.twitter = "https://twitter.com/" + legislator_details.twitter ;
       $scope.facebook = "https://www.facebook.com/" + legislator_details.facebook_id;
