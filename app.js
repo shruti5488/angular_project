@@ -32,21 +32,32 @@ $scope.view_leg = function () {
       debugger;
         var json_leg = JSON.parse(response.data[0]);
         var json_bill_dis = JSON.parse(response.data[1]);
-        // var json_com = JSON.parse(response.data[2]);
-        // var json_com_senate = JSON.parse(response.data[3]);
-        // var json_com_joint = JSON.parse(response.data[4]);
-        // console.log(response);
+        var json_com_house = JSON.parse(response.data[2]);
+        var json_com_senate = JSON.parse(response.data[3]);
+        var json_com_joint = JSON.parse(response.data[4]);
         $scope.party_house = "http://cs-server.usc.edu:45678/hw/hw8/images/r.png";
         $scope.party_senate = "http://cs-server.usc.edu:45678/hw/hw8/images/d.png";
         $scope.house = "http://cs-server.usc.edu:45678/hw/hw8/images/h.png";
         $scope.senate = "http://cs-server.usc.edu:45678/hw/hw8/images/s.svg";
-        $scope.legs = json_leg.results;
-
-        $scope.bill_dis = json_bill_dis.results;
-        // $scope.comms = json_com.results;
-        // $scope.comms_house = json_com_house.results;
-        // $scope.comms_senate = json_com_senate.results;
-        // $scope.comms_joint = json_com_joint.results;
+       
+        $scope.bills_display = json_bill_dis.results;
+         $scope.legs = json_leg.results;
+        $scope.comms_house = json_com_house.results;
+        $scope.comms_house_len = json_com_house.count;
+        $scope.comms_senate = json_com_senate.results;
+        $scope.comms_senate_len = json_com_senate.count;
+        $scope.comms_joint = json_com_joint.results;
+        debugger;
+        $scope.count = [
+          {
+              id: 'tab1',
+          },
+          {
+              id: 'tab2',
+          },
+          {
+              id: 'tab3',
+          }];
     }, function (response) {
         // code to execute in case of error
         debugger;
