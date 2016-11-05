@@ -71,7 +71,7 @@
                                     <th>State</th>
                                     <th></th>
                                   </tr>
-                                  <tr dir-paginate="leg in legs | filter:boxmodel | itemsPerPage: pageSize" current-page="currentPage" pagination-id="legislator" ng-switch on="leg.chamber">
+                                  <tr dir-paginate="leg in legs | filter:boxmodel | itemsPerPage: pageSize" current-page="currentPage" pagination-id="legislator_state" ng-switch on="leg.chamber">
                                     <td class="col-md-2"> 
                                     	<div ng-switch-when='house'>
                                     			<img ng-src="{{ party_house }}" style="width:12%";> 
@@ -99,6 +99,9 @@
                                 </thead>
                               </table>
                             </div> <!-- div panel=state body -->	
+                            <div class="text-center">
+                              <dir-pagination-controls pagination-id="legislator_state" boundary-links="true" template-url="dirPagination.tpl.html"></dir-pagination-controls>
+                          </div>
                           </div>  <!-- id=state div close-->
                           <div id="house" class="tab-pane fade table-responsive">
                             <div class="panel-heading">
@@ -118,21 +121,24 @@
                                     <th>State</th>
                                     <th></th>
                                   </tr>
-                                  <tr dir-paginate="leg in legs | filter:q | itemsPerPage: pageSize"  pagination-id="legislator" current-page="currentPage" ng-switch on="leg.chamber">
-                                    <td class="col-md-2" ng-switch-when='house'>
+                                  <tr dir-paginate="leg_house in legs_house | filter:q | itemsPerPage: pageSize"  pagination-id="legislator_house" current-page="currentPage">
+                                    <td class="col-md-2">
                                     	<img ng-src="{{ party_house }}" style="width:12%";> 
                                     </td>
-                                    <td class="col-md-2" ng-switch-when='house'> {{ leg.last_name }}, {{ leg.first_name}} </td>
-                                    <td class="col-md-2" ng-switch-when='house'> <img ng-src="{{ house }}" style="width:12%";> {{ leg.chamber }} </td>
-                                    <td class="col-md-2" ng-switch-when='house'> {{ leg.district }}</td>
-                                    <td class="col-md-2" ng-switch-when='house'> {{ leg.state_name}}</td>
-                                    <td class="col-md-2" ng-switch-when='house'>
+                                    <td class="col-md-2"> {{ leg_house.last_name }}, {{ leg_house.first_name}} </td>
+                                    <td class="col-md-2"> <img ng-src="{{ house }}" style="width:12%";> {{ leg_house.chamber }} </td>
+                                    <td class="col-md-2"> {{ leg_house.district }}</td>
+                                    <td class="col-md-2"> {{ leg_house.state_name}}</td>
+                                    <td class="col-md-2">
                                     	<button class="btn btn-primary" href="#carousel-example-generic" role="button" data-slide="next" ng-click="view_legislator(leg);"> View Details </button>
                                     </td>
                                   </tr>
                                 </thead>
                               </table>
                             </div>  <!-- div panel=state body -->
+                            <div class="text-center">
+                              <dir-pagination-controls pagination-id="legislator_house" boundary-links="true" template-url="dirPagination.tpl.html"></dir-pagination-controls>
+                          </div>
                           </div>  <!-- div id=house body -->
                           <div id="senate" class="tab-pane fade table-responsive">
                             <div class="panel-heading">
@@ -154,25 +160,29 @@
                                     <th>State</th>
                                     <th></th>
                                   </tr>
-                                  <tr dir-paginate="leg in legs | filter:q | itemsPerPage: pageSize"  pagination-id="legislator" current-page="currentPage"	ng-switch on="leg.chamber">
-                                    <td class="col-md-2" ng-switch-when='senate'> 
+                                  <tr dir-paginate="leg_senate in legs_senate | filter:q | itemsPerPage: pageSize"  pagination-id="legislator_senate" current-page="currentPage">
+                                    <td class="col-md-2"> 
                                       <img ng-src="{{ party_senate }}" style="width:12%";> 
                                     </td>
-                                    <td class="col-md-2" ng-switch-when='senate'> {{ leg.last_name }}, {{leg.first_name }} </td>
-                                    <td class="col-md-2" ng-switch-when='senate'> <img ng-src="{{ senate }}" style="width:12%";> {{ leg.chamber }} </td>
-                                    <td class="col-md-2" ng-switch-when='senate'> {{ leg.state_name }} </td>
-                                    <td class="col-md-2" ng-switch-when='senate'>
+                                    <td class="col-md-2"> {{ leg_senate.last_name }}, {{leg_senate.first_name }} </td>
+                                    <td class="col-md-2"> 
+                                    <img ng-src="{{ senate }}" style="width:12%";> {{ leg_senate.chamber }} </td>
+                                    <td class="col-md-2" > {{ leg_senate.state_name }} </td>
+                                    <td class="col-md-2">
                                       <button class="btn btn-primary" href="#carousel-example-generic" role="button" data-slide="next" ng-click="view_legislator(leg);"> View Details </button>
                                     </td>
                                   </tr>
                                 </thead>
                               </table>
                             </div>  <!-- div panel= body -->
+                            <div class="text-center">
+                              <dir-pagination-controls pagination-id="legislator_senate" boundary-links="true" template-url="dirPagination.tpl.html"></dir-pagination-controls>
+                            </div>
                           </div>  <!-- div id=senate body -->
                         </div><!--div tab-content close -->
-                        <div class="text-center">
+                        <!-- <div class="text-center">
                           <dir-pagination-controls pagination-id="legislator" boundary-links="true" template-url="dirPagination.tpl.html"></dir-pagination-controls>
-                        </div>
+                        </div> -->
                       </div> <!-- div panel panel-default 2nd close -->
                     </div><!-- panel panel-default 1st close-->
                   </div> <!--- item active close-->
@@ -416,7 +426,7 @@
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr dir-paginate="comm_house in comms_house | filter:comm_search | itemsPerPage: pageSize" pagination-id="committee" current-page="currentPage">
+                                  <tr dir-paginate="comm_house in comms_house | filter:comm_search | itemsPerPage: pageSize" pagination-id="committee_house" current-page="currentPage">
                                   	<td class="col-md-1"></td>
                                   	<td class="col-md-1"> 
                                   			<img ng-src="{{ house }}" style="width:20%";> {{ comm_house.chamber | capitalize }} 
@@ -431,6 +441,9 @@
                                   </tr>
                                   </tbody>
                               </table>
+                            </div>
+                            <div class="text-center">
+                              <dir-pagination-controls pagination-id="committee_house" boundary-links="true" template-url="dirPagination.tpl.html"> </dir-pagination-controls>
                             </div>
                           </div>
                           <div id="senate_committee" class="tab-pane fade table-responsive">
@@ -454,7 +467,7 @@
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr dir-paginate="comm_senate in comms_senate | filter:comm_search | itemsPerPage: pageSize"  pagination-id="committee" current-page="currentPage">
+                                  <tr dir-paginate="comm_senate in comms_senate | filter:comm_search | itemsPerPage: pageSize" pagination-id="committee_senate" current-page="currentPage">
                                     <td class="col-md-1"></td>
                                     <td class="col-md-1"> 
                                         <img ng-src="{{ senate }}" style="width:20%";> {{ comm_senate.chamber | capitalize}} 
@@ -465,6 +478,9 @@
                                   </tr>
                                   </tbody>
                               </table>
+                            </div>
+                            <div class="text-center">
+                              <dir-pagination-controls pagination-id="committee_senate" boundary-links="true" template-url="dirPagination.tpl.html"> </dir-pagination-controls>
                             </div>
                           </div>
                           <div id="joint_committee" class="tab-pane fade table-responsive">
@@ -487,7 +503,7 @@
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr dir-paginate="comm_joint in comms_joint | filter:comm_search | itemsPerPage: pageSize" pagination-id="committee" current-page="currentPage">
+                                  <tr dir-paginate="comm_joint in comms_joint | filter:comm_search | itemsPerPage: pageSize"  pagination-id="committee_joint" current-page="currentPage">
                                     <td class="col-md-2"></td>
                                     <td class="col-md-2"> 
                                         <img ng-src="{{ senate }}" style="width:20%";> {{ comm_joint.chamber | capitalize}} 
@@ -495,12 +511,12 @@
                                     <td class="col-md-3"> {{ comm_joint.committee_id | uppercase}} </td>
                                     <td class="col-md-5"> {{ comm_joint.name | capitalize }} </td>
                                   </tr>
-                                  </tbody>
+                                </tbody>
                               </table>
                             </div>
-                          </div>
-                          <div class="text-center">
-                            <dir-pagination-controls pagination-id="committee" boundary-links="true" template-url="dirPagination.tpl.html"> </dir-pagination-controls>
+                            <div class="text-center">
+                              <dir-pagination-controls pagination-id="committee_joint" boundary-links="true" template-url="dirPagination.tpl.html"> </dir-pagination-controls>
+                            </div>
                           </div>
                         </div>
                       </div><!-- panel panel-default close -->
