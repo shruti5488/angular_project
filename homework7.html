@@ -27,9 +27,9 @@
 	<div id="wrapper" class="active">
 		<div id="sidebar-wrapper">
 			<ul class="sidebar-nav" id="sidebar">
-				<li><a class="tab" href="#" ng-click="ViewLeg()"><span class="sub_icon fa fa-user"></span>Legislators</a></li>
-				<li><a class="tab" href="#bill_show"><span class="sub_icon fa fa fa-file-o"	></span>Bills</a></li>
-				<li><a class="tab" href="#committee_show"><span class="sub_icon fa 	fa-sign-in"></span>Committees</a></li>
+				<li><a class="tab" href="javascript:void(0)" ng-click="view_leg()"><span class="sub_icon fa fa-user"></span>Legislators</a></li>
+				<li><a class="tab" href="javascript:void(0)" ng-click="view_bill()"><span class="sub_icon fa fa fa-file-o"	></span>Bills</a></li>
+				<li><a class="tab" href="javascript:void(0)" ng-click="view_comm()"><span class="sub_icon fa fa-sign-in"></span>Committees</a></li>
 				<li><a class="tab"><span class="sub_icon fa fa fa-star"></span>Favorites</a	></li>
 			</ul>
 		</div>
@@ -38,11 +38,12 @@
 	<div id="page-content-wrapper">
 		<div class="page-content inset">
 			<div class ="container second_container">
-				<h1>Legislators</h1>
-				<hr style="border-color: silver;">
-				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
-				  <div class="carousel-inner" role="listbox">
-				    <div class="item active">
+				<div ng-hide="legislator_hide" ng-show="legislator_show">
+					<h1>Legislators</h1>
+					<hr style="border-color: silver;">
+					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
+				  	<div class="carousel-inner" role="listbox">
+				  	  <div class="item active">
 				    	<div class="panel panel-default">
 				    		<div class="panel-body">
 				    			<ul class="nav nav-tabs">
@@ -94,7 +95,7 @@
 				    									<td class="col-md-2"> {{ leg.district }} </td>
 				    									<td class="col-md-2"> {{ leg.state_name }} </td>
 				    									<td class="col-md-2">
-				    										<button class="btn btn-primary" href="#carousel-example-generic" role="button" data-slide="next" ng-click="view_legislator(leg, bills, comms);"> View Details </button>
+				    										<button class="btn btn-primary" href="#carousel-example-generic" role="button" data-slide="next" ng-click="view_legislator(leg);"> View Details </button>
 				    									</td>
 				    								</tr>
 				    							</thead>
@@ -128,7 +129,7 @@
 				    									<td class="col-md-2" ng-switch-when='house'> {{ leg.district }}</td>
 				    									<td class="col-md-2" ng-switch-when='house'> {{ leg.state_name}}</td>
 				    									<td class="col-md-2" ng-switch-when='house'>
-				    										<button class="btn btn-primary" href="#carousel-example-generic" role="button" data-slide="next"> View Details </button>
+				    										<button class="btn btn-primary" href="#carousel-example-generic" role="button" data-slide="next" ng-click="view_legislator(leg);"> View Details </button>
 				    									</td>
 				    								</tr>
 				    							</thead>
@@ -163,7 +164,7 @@
 				    									<td class="col-md-2" ng-switch-when='senate'> <img ng-src="{{ senate }}" style="width:12%";> {{ leg.chamber }} </td>
 				    									<td class="col-md-2" ng-switch-when='senate'> {{ leg.state_name }} </td>
 				    									<td class="col-md-2" ng-switch-when='senate'>
-				    										<button class="btn btn-primary" href="#carousel-example-generic" role="button" data-slide="next"> View Details </button>
+				    										<button class="btn btn-primary" href="#carousel-example-generic" role="button" data-slide="next" ng-click="view_legislator(leg);"> View Details </button>
 				    									</td>
 				    								</tr>
 				    							</thead>
@@ -172,12 +173,12 @@
 				    				</div>  <!-- div id=senate body -->
 				    			</div> <!--div tab-content close -->
 				    			<div class="text-center">
-          							<dir-pagination-controls boundary-links="true" template-url="dirPagination.tpl.html"></dir-pagination-controls>
-          						</div>
+          					<dir-pagination-controls boundary-links="true" template-url="dirPagination.tpl.html"></dir-pagination-controls>
+          				</div>
 				    		</div> <!-- div panel panel-default 2nd close -->
 				    	</div> <!-- panel panel-default 1st close-->
-				    </div>
-				    <div class="item">
+				  	  </div> <!--- item active close-->
+				  	  <div class="item">
 				    	<div class="panel panel-default">
 				    		 <span class="left carousel-control fa fa-chevron-left details_icon" href="#carousel-example-generic" data-slide="prev"></span><h4 id="details_leg">Details</h4><hr class="hr_panel">
 				    		<div class="panel-body" style="padding-top: 5px;">
@@ -264,10 +265,10 @@
 				    							</tr>
 				    						</thead>
 				    						<tbody>
-				    							<tr ng-repeat="comm in comms">
-				    								<td> {{ comm.chamber }} </td>
-				    								<td> {{ comm.committee_id }} </td>
-				    								<td> {{ comm.name }} </td>
+				    							<tr ng-repeat="leg_comm in leg_comms">
+				    								<td> {{ leg_comm.chamber }} </td>
+				    								<td> {{ leg_comm.committee_id }} </td>
+				    								<td> {{ leg_comm.name }} </td>
 				    							</tr>
 				    						</tbody>
 				    					</table>
@@ -286,13 +287,13 @@
 				    							</tr>
 				    						</thead>
 				    						<tbody>
-				    							<tr ng-repeat="bill in bills">
-				    								<td> {{ bill.bill_id }} </td>
-				    								<td> {{ bill.official_title }} </td>
-				    								<td> {{ bill.chamber }} </td>
-				    								<td> {{ bill.bill_type }} </td>
-				    								<td> {{ bill.congress }} </td>
-				    								<td> <a href="{{ bill.last_version.urls.pdf }}" target="_blank">Link</a> </td>
+				    							<tr ng-repeat="leg_bill in leg_bills">
+				    								<td> {{ leg_bill.bill_id }} </td>
+				    								<td> {{ leg_bill.official_title }} </td>
+				    								<td> {{ leg_bill.chamber }} </td>
+				    								<td> {{ leg_bill.bill_type }} </td>
+				    								<td> {{ leg_bill.congress }} </td>
+				    								<td> <a href="{{ leg_bill.last_version.urls.pdf }}" target="_blank">Link</a> </td>
 				    							</tr>
 				    						</tbody>
 				    					</table>
@@ -300,8 +301,141 @@
 				    			</div>
 				    		</div> <!--- Panel-body div close-->
 				    	</div>
-				    </div>
-				  </div>
+				  	  </div> <!--- item close-->
+				  	</div>
+					</div>
+				</div>
+				<div ng-hide="bill_hide" ng-show="bill_show">
+					<h1>Bills</h1>
+					<hr style="border-color: silver;">
+					<div id="carousel_bill" class="carousel slide" data-ride="carousel" data-interval="false">
+						<div class="carousel-inner" role="listbox">
+							<div class="item active">
+								<div class="panel panel-default">
+									<div class="panel-body">
+										<ul class="nav nav-tabs">
+									    	<li class="active"><a class="no_color" data-toggle="tab" href="#active_bill">Active Bills</a></li>
+									    	<li><a class="no_color" data-toggle="tab" href="#new_bill">	New Bills</a></li>
+										</ul>
+									</div>
+									<div class="panel panel-default reduce_panel">
+										<div class="tab-content">
+											<div id="active_bill" class="tab-pane fade in active table-responsive">
+												<div class="panel-heading">
+													<div class="col-xs-9">Active Bills</div>
+													<div class="col-xs-3"><input ng-model="bill_search" id="search" class="form-control" placeholder="Search"></div>
+												</div>
+												<div class="panel-body">
+													<table class="table">
+														<thead>
+															<tr>
+																<th>Bill ID</th>
+																<th>Bill Type</th>
+																<th>Title</th>
+																<th>Chamber</th>
+																<th>Introduced On</th>
+																<th>Sponsor</th>
+																<th></th>
+															</tr>
+														</thead>
+															<tr dir-paginate="bill_display in bill_displays | filter:bill_search | itemsPerPage: pageSize" current-page="currentPage" ng-switch on="bill_display.chamber">
+																<td class="col-md-2"> {{ bill_display.bill_id | uppercase}} 	</td>
+																<td class="col-md-1"> {{ bill_display.bill_type | 	uppercase}} </td>
+																<td class="col-md-3"> {{ bill_display.official_title }} </td	>
+																<td class="col-md-2"> 
+																	<div ng-switch-when='house'>
+																			<img ng-src="{{ house }}" style="width:30%";> {{ bill_display.chamber | capitalize }} 
+																	</div>
+																	<div ng-switch-when='senate'>
+																			<img ng-src="{{ senate }}" style="width:30%";>	{{ bill_display.chamber | capitalize}} 
+																	</div>
+																</td>
+																<td class="col-md-2"> {{bill_display.introduced_on}} </td>
+																<td class="col-md-2"> {{bill_display.sponsor.title}}. {{bill_display.sponsor.last_name}}, 	{{bill_display.sponsor.first_name}}  </td>
+																<td class="col-md-2"> 
+																	<button class="btn btn-primary" href="#carousel_bill" role="button" data-slide="next" ng-click=""> View Details </button>
+																</td>
+															</tr>
+														</table>
+												</div>
+											</div>
+											<div id="new_bill" class="tab-pane fade table-responsive">
+											</div>
+											<div class="text-center">
+        	  						<dir-pagination-controls boundary-links="true" template-url="dirPagination.tpl.html"></dir-pagination-controls>
+        	  					</div>
+        	  				</div> <!-- panel panel-default -->
+        	  			</div>	
+        	  		</div>
+        	  	</div>
+						</div>
+					</div>
+				</div> 
+				<div ng-hide="committee_hide" ng-show="committee_show">
+					<h1>Committee</h1>
+					<hr style="border-color: silver;">
+					<div id="carousel_bill" class="carousel slide" data-ride="carousel" data-interval="false">
+						<div class="carousel-inner" role="listbox">
+							<div class="item active">
+								<div class="panel panel-default">
+									<div class="panel-body">
+										<ul class="nav nav-tabs">
+									    	<li class="active"><a class="no_color" data-toggle="tab" href="#house_committee">House</a></li>
+										</ul>
+									</div>
+									<div class="panel panel-default reduce_panel">
+										<div class="tab-content">
+											<div id="house_committee" class="tab-pane fade in active table-responsive">
+												<div class="panel-heading">
+													<div class="col-xs-9">House</div>
+													<div class="col-xs-3">
+														<input ng-model="comm_search" id="search" class="form-control" placeholder=""></div	>
+												</div>
+												<div class="panel-body">
+													<table class="table">
+														<thead>
+															<tr>
+																<th></th>
+																<th>Chamber</th>
+																<th>Committe ID</th>
+																<th>Name</th>
+																<th>Parent Committee</th>
+																<th>Contact</th>
+																<th>Office</th>
+															</tr>
+														</thead>
+														<!-- <tbody>
+															<tr dir-paginate="comm in comms | 	filter:comm_search | itemsPerPage: pageSize" 	current-currentPage	" ng-switch on="comm.chamber">
+																<td class="col-md-1"></td>
+																<td class="col-md-1"> 
+																	<div ng-switch-when='house'>
+																		<img ng-src="{{ house }}" style="width:20%";> {{ comm.chamber | capitalize }} 
+																	</div>
+																	<div ng-switch-when='senate'>
+																		<img ng-src="{{ senate }}" style="width:20%";> {{ comm.chamber | capitalize}} 
+																	</div>
+																</td>
+																<td class="col-md-2"> {{ comm.committee_id | uppercase}} </td>
+																<td class="col-md-3"> {{ comm.name | capitalize }} </td>
+																<td class="col-md-2"> {{comm.parent_committee_id | uppercase}}</td>
+																<td class="col-md-2"> {{comm.phone}}  </td>
+																<td class="col-md-2"> 
+																	{{comm.office}}
+																</td>
+															</tr>
+														</tbody> -->
+													</table>
+												</div>
+											</div>
+											<div class="text-center">
+						     				<dir-pagination-controls boundary-links="true" template-url="dirPagination.tpl.html"> </dir-pagination-controls>
+						     			</div>
+						     		</div>
+						     	</div> <!-- panel panel-default close -->
+						    </div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div> <!-- CONTAINER close -->
 		</div>

@@ -1,6 +1,20 @@
 
-angular.module('myApp', ['angularUtils.directives.dirPagination']).controller('mainController', function($scope, $http){
-    
+var app = angular.module('myApp', ['angularUtils.directives.dirPagination']);
+
+app.controller('mainController', function($scope, $http){
+
+      $scope.legislator_show = true;
+      $scope.bill_show = false;
+      $scope.committee_show = false;
+      $scope.bill_hide = true;
+      $scope.committee_hide = true;
+
+$scope.view_leg = function () {
+  $scope.legislator_show = true;
+  $scope.bill_show = false;
+  $scope.committee_show = false;
+}
+
   $scope.Math = Math;
   $scope.states = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District Of Columbia','Florida',
                   'Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts',
@@ -15,26 +29,50 @@ angular.module('myApp', ['angularUtils.directives.dirPagination']).controller('m
       method: 'GET',
       url: 'logic.php',
     }).then(function (response) {
+      debugger;
         var json_leg = JSON.parse(response.data[0]);
-        var json_bill = JSON.parse(response.data[1]);
-        var json_com = JSON.parse(response.data[2]);
-        console.log(response);
-        debugger;
+        var json_bill_dis = JSON.parse(response.data[1]);
+        // var json_com = JSON.parse(response.data[2]);
+        // var json_com_senate = JSON.parse(response.data[3]);
+        // var json_com_joint = JSON.parse(response.data[4]);
+        // console.log(response);
         $scope.party_house = "http://cs-server.usc.edu:45678/hw/hw8/images/r.png";
         $scope.party_senate = "http://cs-server.usc.edu:45678/hw/hw8/images/d.png";
         $scope.house = "http://cs-server.usc.edu:45678/hw/hw8/images/h.png";
         $scope.senate = "http://cs-server.usc.edu:45678/hw/hw8/images/s.svg";
         $scope.legs = json_leg.results;
-        $scope.bills = json_bill.results;
-        $scope.comms = json_com.results;
+
+        $scope.bill_dis = json_bill_dis.results;
+        // $scope.comms = json_com.results;
+        // $scope.comms_house = json_com_house.results;
+        // $scope.comms_senate = json_com_senate.results;
+        // $scope.comms_joint = json_com_joint.results;
     }, function (response) {
         // code to execute in case of error
+        debugger;
     });
+    $scope.view_bill = function () {
 
-    $scope.view_legislator = function(legislator_details, bill_details, committee_details){      
+      $scope.legislator_show = false;
+      $scope.bill_show = true;
+      $scope.committee_show = false;
+    }
+
+    $scope.view_comm = function () {
+
+      // console.log($scope.comms);
+      $scope.legislator_show = false;
+      $scope.bill_show = false;
+      $scope.committee_show = true;
+
+
+    }
+
+    $scope.view_legislator = function(legislator_details){      
+      debugger;
       $scope.detail = legislator_details;
-      console.log(legislator_details);
-      console.log(bill_details);
+      // console.log(legislator_details);
+      // console.log(bill_details);
 
       var str = "string";
       var bioguide_id = legislator_details.bioguide_id;
@@ -46,36 +84,36 @@ angular.module('myApp', ['angularUtils.directives.dirPagination']).controller('m
         bioguide_id : bioguide_id
       }
     }).then(function (response) {
-        console.log(response);
+        // console.log(response);
         var json_leg_comm = JSON.parse(response.data[0]);
         var json_leg_bill = JSON.parse(response.data[1]);
-        var bill = [];
-        var comm = [];
+        var leg_bill = [];
+        var leg_comm = [];
         var i, j = 0;
         if (json_leg_comm.count > 0){
           for(i=0; i<json_leg_comm.count ; i++) {
             if(j<5) {
-              comm[i] = json_leg_comm.results[i];
+              leg_comm[i] = json_leg_comm.results[i];
               j++;
             }
           }
         } else {
-          comm[0] = "N.A";
+          leg_comm[0] = "N.A";
         }
 
         j = 0;
         if (json_leg_bill.count > 0){
           for(i=0; i<json_leg_bill.count ; i++) {
             if(j<5) {
-              bill[i] = json_leg_bill.results[i];
+              leg_bill[i] = json_leg_bill.results[i];
               j++;
             }
           }
         } else {
-          bill[0] = "N.A";
+          leg_bill[0] = "N.A";
         }
-        $scope.comms = comm;
-        $scope.bills = bill;
+        $scope.leg_comms = leg_comm;
+        $scope.legs_bills = leg_bill;
     }, function (response) {
         // code to execute in case of error
     });
@@ -103,11 +141,12 @@ angular.module('myApp', ['angularUtils.directives.dirPagination']).controller('m
         $scope.party_name = "Independent";
         $scope.party_image = "http://independentamericanparty.org/wp-content/themes/v/images/logo-american-heritage-academy.png";
       }
-
-
   };
-  
-  // }
 });
 
+  app.filter('capitalize', function() {
+    return function(input) {
+      return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
+    }
+  });
 
