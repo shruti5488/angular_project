@@ -2,11 +2,16 @@
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 #wrapper {
-	padding-left: 70px;
+  padding-left: 70px;
+	padding-top: 50px;
 	transition: all .4s ease 0s;
 	height:; 100%;
 }
-
+.star{
+  border: 1px solid;
+  padding: 5px;
+  border-radius: 4px;
+}
 .pdf_display{
     width: 500px;
     height: 550px;
@@ -48,7 +53,7 @@
   background-color: transparent;
 }
 .second_container {
-  padding-left: 110px;
+  padding-left: 70px;
   background-color: #e7e7e7;
 }
 
@@ -84,7 +89,7 @@ border-color: #ddd;
     padding: 0;
 }
 #page-content-wrapper {
-    padding-left: 0;
+    padding-left: 100px;
     margin-left: 0;
     width: 100%;
     height: auto;
@@ -147,7 +152,9 @@ a{
 	padding-left: 20px;
 
 }
-
+.fa-star-o{
+  
+}
 .dropdown {
   float: right;
 }
@@ -160,24 +167,51 @@ a{
   height: 25px;
   background-color: whitesmoke;
 }
+.party_fav{
+  width:25px;
+}
+.pic_fav{
+  width:50%;
+}
+.btn-icon {
+  padding: 0;
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  cursor: pointer;
+  border-radius: 0;
+  &:active, &:focus {
+    .box-shadow(none);
+    border-color: transparent;
+  }
+  &:active {
+    .scale(0.9);
+  }
+  &:focus {
+    outline: 0 none !important;
+  }
+  .fa {
+    .transition(color 0.1s ease);
+  }
+}
+
+// Define color for each button type
+@icon-default-color: #666;
+@icon-star-color: yellow;
+
+.btn-icon {
+  .fa-star-o {
+    color: @icon-default-color;
+    &:hover {
+      color: fadeout(@icon-default-color, 15%);
+    }
+    &.active {
+      color: @icon-star-color;
+      &:hover {
+        color: fadeout(@icon-star-color, 15%);
+      }
+    }
+  }
+}
 
 
-
-/*@media (max-width:767px) {
-    #wrapper {
-    padding-left: 70px;
-    transition: all .4s ease 0s;
-}
-#sidebar-wrapper {
-    left: 70px;
-}
-#wrapper.active {
-    padding-left: 150px;
-}
-#wrapper.active #sidebar-wrapper {
-    left: 150px;
-    width: 150px;
-    transition: all .4s ease 0s;
-}
-}
-*/

@@ -7,12 +7,15 @@ app.controller('mainController', function($scope, $http){
       $scope.bill_show = false;
       $scope.committee_show = false;
       $scope.bill_hide = true;
-      $scope.committee_hide = true;
+      $scope.committee_hide = true; 
+      $scope.fav_hide = true;
+      $scope.fav_show = false;
 
-$scope.view_leg = function () {
-  $scope.legislator_show = true;
-  $scope.bill_show = false;
-  $scope.committee_show = false;
+  $scope.view_leg = function () {
+    $scope.legislator_show = true;
+    $scope.bill_show = false;
+    $scope.committee_show = false;
+    $scope.fav_show = false;
 }
 
   $scope.Math = Math;
@@ -50,7 +53,6 @@ $scope.view_leg = function () {
         $scope.comms_senate = json_com_senate.results;
         $scope.comms_senate_len = json_com_senate.count;
         $scope.comms_joint = json_com_joint.results;
-        
     }, function (response) {
       
     });
@@ -59,21 +61,168 @@ $scope.view_leg = function () {
       $scope.legislator_show = false;
       $scope.bill_show = true;
       $scope.committee_show = false;
+      $scope.fav_show = false;
+      debugger;
+      var active_bills = [];
+      var new_bills = [];
+      var j = 0;
+      var k = 0;
+      for(i=0; i<$scope.bills_display.length ; i++){
+        if ($scope.bills_display[i].history.active == false) {
+          new_bills[j] = $scope.bills_display[i];
+          j++;
+        }
+        else{
+          active_bills[k] = $scope.bills_display[i];
+          k++;
+        }
+      }
+      $scope.new_bills = new_bills;
+      $scope.active_bills = active_bills;
     }
 
     $scope.view_comm = function () {
       $scope.legislator_show = false;
       $scope.bill_show = false;
       $scope.committee_show = true;
+      $scope.fav_show = false;
+      
     }
-
+    $scope.legislator_favbar = [];
+    $scope.toggle_leg = function (index, leg_fav) {
+      
+      var new_flag, pic_url; 
+      new_flag = "true";
+      if ($scope.legislator_favbar.length == 0)
+      {
+        new_flag = "true";
+        
+      }
+      else{
+        for (i=0; i<$scope.legislator_favbar.length; i++){
+          if (leg_fav.bioguide_id == $scope.legislator_favbar[i].key)
+          {
+            new_flag = "false";
+          }
+          else if(leg_fav.key == $scope.legislator_favbar[i].key) {
+            new_flag = "false";
+          }
+        }
+      }
+      if (new_flag == "true")
+      {
+        // $scope.legislator_favbar.push(flag + ':' + new_flag  , key + ':'+ leg_fav.committee_id ,value + ': ' + leg_fav);
+        pic_url = "https://theunitedstates.io/images/congress/original/" + leg_fav.bioguide_id + ".jpg";
+        if (leg_fav.party=="R"){
+          party_symb = "http://cs-server.usc.edu:45678/hw/hw8/images/r.png";
+        }
+        else if (leg_fav.party == "D"){
+         party_symb = "http://cs-server.usc.edu:45678/hw/hw8/images/d.png";
+        }
+        else if (leg_fav.party == "I"){
+          party_symb = "http://independentamericanparty.org/wp-content/themes/v/images/logo-american-heritage-academy.png";
+        }
+        if (leg_fav.chamber="house"){
+          chamber_pic = "http://cs-server.usc.edu:45678/hw/hw8/images/h.png";
+        } 
+        else {
+           chamber_pic = "http://cs-server.usc.edu:45678/hw/hw8/images/s.svg";
+        }
+        $scope.legislator_favbar.push({flag:new_flag,key:leg_fav.bioguide_id,value:leg_fav,pic:pic_url,party:party_symb,chamber:chamber_pic});
+      } 
+      else {
+        $scope.legislator_favbar.splice(index, 1);        
+      }
+    }
+    $scope.bill_favbar = [];
+    $scope.toggle_bill = function (index, bill_fav) {
+      
+      var new_flag, pic_url;
+      new_flag = "true"; 
+      debugger;
+      if ($scope.bill_favbar.length == 0)
+      {
+        new_flag = "true";
+        
+      }
+      else{
+        for (i=0; i<$scope.bill_favbar.length; i++){
+          if (bill_fav.bill_id == $scope.bill_favbar[i].key)
+          {
+            new_flag = "false";
+          }
+          else if(bill_fav.key == $scope.bill_favbar[i].key) {
+            new_flag = "false";
+          }
+        }
+      }
+      if (new_flag == "true")
+      {
+        if (bill_fav.chamber=="house"){
+          chamber_pic = "http://cs-server.usc.edu:45678/hw/hw8/images/h.png";
+        } 
+        else {
+           chamber_pic = "http://cs-server.usc.edu:45678/hw/hw8/images/s.svg";
+        }
+        $scope.bill_favbar.push({flag:new_flag,key:bill_fav.bill_id,value:bill_fav,chamber:chamber_pic});
+      } 
+      else {
+        $scope.bill_favbar.splice(index, 1);        
+      }
+    }
+    $scope.committee_favbar = [];
+    $scope.toggle_comm = function (index, comm_fav) {  
+      var new_flag, pic_url; 
+      new_flag = "true";
+      debugger;
+      if ($scope.committee_favbar.length == 0)
+      {
+        new_flag = "true";
+        
+      }
+      else{
+        for (i=0; i<$scope.committee_favbar.length; i++){
+          if (comm_fav.bioguide_id == $scope.committee_favbar[i].key)
+          {
+            new_flag = "false";
+          }
+          else if(comm_fav.key == $scope.committee_favbar[i].key) {
+            new_flag = "false";
+          }
+        }
+      }
+      if (new_flag == "true")
+      {
+        if (comm_fav.chamber=="house"){
+          chamber_pic = "http://cs-server.usc.edu:45678/hw/hw8/images/h.png";
+        } 
+        else {
+           chamber_pic = "http://cs-server.usc.edu:45678/hw/hw8/images/s.svg";
+        }
+        $scope.committee_favbar.push({flag:new_flag,key:comm_fav.committee_id,value:comm_fav,chamber:chamber_pic});
+      } 
+      else {
+        $scope.committee_favbar.splice(index, 1);        
+      }
+    }
     $scope.viewdetail_bill = function(bill_detail){      
-      $scope.detail = bill_detail;
+      $scope.bill_detail = bill_detail;
+     
      }
+
+    $scope.view_fav = function(bill_detail){  
+      
+     console.log($scope.legislator_favbar);
+      $scope.fav_show = true;
+      $scope.legislator_show = false;
+      $scope.bill_show = false;
+      $scope.committee_show = false;
+     }
+
 
     $scope.view_legislator = function(legislator_details){      
       $scope.detail = legislator_details;
-
+      
       var str = "string";
       var bioguide_id = legislator_details.bioguide_id;
       $http({
@@ -113,7 +262,7 @@ $scope.view_leg = function () {
           leg_bill[0] = "N.A";
         }
         $scope.leg_comms = leg_comm;
-        $scope.legs_bills = leg_bill;
+        $scope.leg_bills = leg_bill;
     }, function (response) {
         // code to execute in case of error
     });
@@ -142,6 +291,9 @@ $scope.view_leg = function () {
         $scope.party_image = "http://independentamericanparty.org/wp-content/themes/v/images/logo-american-heritage-academy.png";
       }
   };
+      $scope.item = {
+        star: false
+      };
 });
 
   app.filter('capitalize', function() {
@@ -149,4 +301,6 @@ $scope.view_leg = function () {
       return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
     }
   });
+
+
 
