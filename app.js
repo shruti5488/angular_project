@@ -41,7 +41,6 @@ $scope.view_leg = function () {
         $scope.party_senate = "http://cs-server.usc.edu:45678/hw/hw8/images/d.png";
         $scope.house = "http://cs-server.usc.edu:45678/hw/hw8/images/h.png";
         $scope.senate = "http://cs-server.usc.edu:45678/hw/hw8/images/s.svg";
-        debugger;
         $scope.bills_display = json_bill_dis.results;
         $scope.legs = json_leg.results;
         $scope.legs_house = json_leg_house.results;
@@ -52,19 +51,8 @@ $scope.view_leg = function () {
         $scope.comms_senate_len = json_com_senate.count;
         $scope.comms_joint = json_com_joint.results;
         
-        $scope.count = [
-          {
-              id: 'tab1',
-          },
-          {
-              id: 'tab2',
-          },
-          {
-              id: 'tab3',
-          }];
     }, function (response) {
-        // code to execute in case of error
-        debugger;
+      
     });
     $scope.view_bill = function () {
 
@@ -74,20 +62,17 @@ $scope.view_leg = function () {
     }
 
     $scope.view_comm = function () {
-
-      // console.log($scope.comms);
       $scope.legislator_show = false;
       $scope.bill_show = false;
       $scope.committee_show = true;
-
-
     }
 
+    $scope.viewdetail_bill = function(bill_detail){      
+      $scope.detail = bill_detail;
+     }
+
     $scope.view_legislator = function(legislator_details){      
-      debugger;
       $scope.detail = legislator_details;
-      // console.log(legislator_details);
-      // console.log(bill_details);
 
       var str = "string";
       var bioguide_id = legislator_details.bioguide_id;

@@ -7,6 +7,10 @@
 	height:; 100%;
 }
 
+.pdf_display{
+    width: 500px;
+    height: 550px;
+}
 .no-margin{
 	margin: 0px;
   background-color: white;
@@ -156,7 +160,10 @@ a{
   height: 25px;
   background-color: whitesmoke;
 }
-@media (max-width:767px) {
+
+
+
+/*@media (max-width:767px) {
     #wrapper {
     padding-left: 70px;
     transition: all .4s ease 0s;
@@ -173,3 +180,4 @@ a{
     transition: all .4s ease 0s;
 }
 }
+*/

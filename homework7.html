@@ -180,9 +180,6 @@
                             </div>
                           </div>  <!-- div id=senate body -->
                         </div><!--div tab-content close -->
-                        <!-- <div class="text-center">
-                          <dir-pagination-controls pagination-id="legislator" boundary-links="true" template-url="dirPagination.tpl.html"></dir-pagination-controls>
-                        </div> -->
                       </div> <!-- div panel panel-default 2nd close -->
                     </div><!-- panel panel-default 1st close-->
                   </div> <!--- item active close-->
@@ -366,7 +363,7 @@
                                   <td class="col-md-2"> {{bill_display.introduced_on}} </td>
                                   <td class="col-md-2"> {{bill_display.sponsor.title}}. {{bill_display.sponsor.last_name}}, 	{{bill_display.sponsor.first_name}}</td>
                                   <td class="col-md-2"> 
-                                    <button class="btn btn-primary" href="#carousel_bill" role="button" data-slide="next" ng-click=""> View Details </button>
+                                    <button class="btn btn-primary" href="#carousel_bill" role="button" data-slide="next" ng-click="viewdetail_bill(bill_display)"> View Details </button>
                                   </td>
                                 </tr>
                               </table>
@@ -383,7 +380,62 @@
                   </div>
                   <div class="item">
                     <div class="panel panel-default">
-                    <span class="left carousel-control fa fa-chevron-left details_icon" href="  #carousel_bill" data-slide="prev"></span>
+                      <span class="left carousel-control fa   fa-chevron-left details_icon" href="    #carousel_bill" data-slide="prev"></span>
+                      <h4 id="details_leg"> Details</h4>
+                      <hr class="hr_panel">
+                      <div class="panel-body" style="padding-top: 5px;">
+                          <div class="col-md-6">
+                            <div class="table-responsive">
+                              <table class="table">
+                                <tbody>
+                                  <tr>
+                                    <td> Bill ID</td>
+                                    <td> {{detail.bill_id | uppercase}} </td>
+                                  </tr>
+                                  <tr>
+                                    <td> Title </td>
+                                    <td> {{detail.official_title}} </td>
+                                  </tr>
+                                  <tr>
+                                    <td> Bill Type </td>
+                                    <td> {{detail.bill_type | uppercase}} </td>
+                                  </tr>
+                                  <tr>
+                                    <td> Sponsor </td>
+                                    <td> {{detail.official_title}} </td>
+                                  </tr>
+                                  <tr>
+                                    <td> Chamber </td>
+                                    <td> {{detail.chamber | capitalize}} </td>
+                                  </tr>
+                                  <tr>
+                                    <td> Status </td>
+                                    <td> {{detail.official_title}} </td>
+                                  </tr>
+                                  <tr>
+                                    <td> Introduced On </td>
+                                    <td> {{$scope.detail.introduced_on | date}} </td>
+                                  </tr>
+                                  <tr>
+                                    <td> Congress URL </td>
+                                    <td> <a href=" {{detail.urls.congress}}" target="_blank">URL</a> </td>
+                                  </tr>
+                                  <tr>
+                                    <td> Version Status </td>
+                                    <td> {{detail.last_version.version_name}} </td>
+                                  </tr>
+                                  <tr>
+                                    <td> Bill URL </td>
+                                    <td> <a href=" {{detail.last_version.urls.pdf}}" target="_blank">URL</a> </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                          <object ng-attr-data="{{ detail.last_version.urls.pdf }}" type="application/pdf" style="width:500px; height:550px;"></object>
+                          </div>
+                      </div>
                     </div>
                   </div>
                 </div>
