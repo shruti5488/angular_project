@@ -524,7 +524,9 @@
                                 <tbody>
                                   <tr dir-paginate="comm_house in comms_house | filter:comm_search | itemsPerPage: pageSize " pagination-id="committee_house" current-page="currentPage">
                                   	<td class="col-md-1">
-                                      <button data-ng-click="toggle_comm($index, comm_house)"><span class="fa fa-star-o"></span></button> 
+                                      <button data-ng-click="toggle_comm($index, comm_house)">
+                                       <i ng-class="{'fa fa-star-o': autofav, 'fa fa-star yellow': !autofav}"></i>
+                                      </button> 
                                     </td>
                                   	<td class="col-md-1"> 
                                   			<img ng-src="{{ house }}" style="width:40%";> {{ comm_house.chamber | capitalize }} 

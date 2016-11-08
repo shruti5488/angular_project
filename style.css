@@ -152,8 +152,13 @@ a{
 	padding-left: 20px;
 
 }
-.fa-star-o{
-  
+.fa-star-o {
+  display: inline-block;
+
+}
+.fa-star.yellow {
+  display: inline-block;
+  color: yellow;
 }
 .dropdown {
   float: right;

@@ -2,7 +2,7 @@
 var app = angular.module('myApp', ['angularUtils.directives.dirPagination']);
 
 app.controller('mainController', function($scope, $http){
-
+        $scope.autofav = true;
       $scope.legislator_show = true;
       $scope.bill_show = false;
       $scope.committee_show = false;
@@ -87,8 +87,29 @@ debugger;
       $scope.legislator_show = false;
       $scope.bill_show = false;
       $scope.committee_show = true;
-      $scope.fav_show = false;
+      $scope.fav_show = false
+      $scope.autofav = !$scope.autofav ;
+      // $scope.comm_house_star = [];
+      // $scope.comm_house_star.push({autofav:false,value:$scope.comms_house});
       
+      //  var check_star = [];
+      //  check_star = JSON.parse(localStorage.getItem('star_storage'));
+      //  debugger;
+      //  var k = 0;
+      //  if (check_star != null) {
+      //   for (i=0; i<$scope.comms_house.length ; i++) {
+      //     if (check_star[k].key == $scope.comms_house[i].committee_id){
+      //       $scope.comm_house_star.push({autofav:false,value:$scope.comms_house[i]});
+      //       k++;
+      //     }
+      //     else {
+      //       $scope.comm_house_star.push({autofav:true,value:$scope.comms_house[i]});
+      //     }
+      //   }
+      // }
+      // else {
+      //   $scope.autofav = true;
+      // }
     }
     $scope.legislator_favbar = [];
     $scope.toggle_leg = function (index, leg_fav) {
@@ -185,7 +206,9 @@ debugger;
     // console.log($scope.bill_favbar);
 
     $scope.committee_favbar = [];
-    $scope.toggle_comm = function (index, comm_fav) {  
+    $scope.fav_star = [];
+    $scope.toggle_comm = function (index, comm_fav) { 
+
       var new_flag, pic_url; 
       new_flag = "true";
       debugger;
@@ -216,15 +239,18 @@ debugger;
         $scope.committee_favbar.push({flag:new_flag,key:comm_fav.committee_id,value:comm_fav,chamber:chamber_pic});
         localStorage.setItem("committee_storage", JSON.stringify($scope.committee_favbar));
         debugger;
+        $scope.fav_star.push({key:comm_fav.committee_id});
+        localStorage.setItem("star_storage", JSON.stringify($scope.fav_star));
+        // $scope.autofav_yellow = false;
       } 
       else {
         $scope.committee_favbar.splice(index, 1);  
-        localStorage.setItem("committee_storage", JSON.stringify($scope.committee_favbar));      
+        localStorage.setItem("committee_storage", JSON.stringify($scope.committee_favbar));
+        // $scope.autofav_yellow = true;
       }
     }
     
     // console.log($scope.committee_favbar);
-
     $scope.viewdetail_bill = function(bill_detail){      
       $scope.bill_detail = bill_detail;
      
@@ -319,8 +345,6 @@ debugger;
       $scope.item = {
         star: false
       };
-              debugger;
-        console.log($scope.legs);
 });
 
 
