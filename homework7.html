@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+  <head> 
+
     <title>Learn!</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +12,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script> 
-    <script src="app.js"></script>
+    <script src="application.js"></script>
     <script src="dirPagination.js"></script>
   </head>
   <body class="serif">
@@ -71,7 +72,7 @@
                                     <th>State</th>
                                     <th></th>
                                   </tr>
-                                  <tr dir-paginate="leg in legs | filter:boxmodel | orderBy:['state_name', 'last_name'] | itemsPerPage: pageSize" current-page="currentPage" pagination-id="legislator_state" ng-switch on="leg.chamber">
+                                  <tr dir-paginate="leg in legs | filter:boxmodel | orderBy:['state_name', 'last_name'] | itemsPerPage:pageSize" current-page="currentPage" pagination-id="legislator_state" ng-switch on="leg.chamber">
                                     <td class="col-md-2"> 
                                     	<div ng-switch-when='house'>
                                     			<img ng-src="{{ party_house }}" style="width:20%";> 
@@ -121,7 +122,7 @@
                                     <th>State</th>
                                     <th></th>
                                   </tr>
-                                  <tr dir-paginate="leg_house in legs_house | filter:q | orderBy:'last_name'| itemsPerPage: pageSize "  pagination-id="legislator_house" current-page="currentPage">
+                                  <tr dir-paginate="leg_house in legs_house | filter:q | orderBy:'last_name'| itemsPerPage: pageSize"  pagination-id="legislator_house" current-page="currentPage">
                                     <td class="col-md-2">
                                     	<img ng-src="{{ party_house }}" style="width:20%";> 
                                     </td>
@@ -160,7 +161,7 @@
                                     <th>State</th>
                                     <th></th>
                                   </tr>
-                                  <tr dir-paginate="leg_senate in legs_senate | filter:q | orderBy:'last_name' | itemsPerPage: pageSize"  pagination-id="legislator_senate" current-page="currentPage">
+                                  <tr dir-paginate="leg_senate in legs_senate | filter:q | orderBy:'last_name' | itemsPerPage: pageSize "  pagination-id="legislator_senate" current-page="currentPage">
                                     <td class="col-md-2"> 
                                       <img ng-src="{{ party_senate }}" style="width:20%";> 
                                     </td>
@@ -653,7 +654,7 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr ng-repeat="legis_fav in legislator_favbar">
+                            <tr ng-repeat="legis_fav in legislator_favbar track by $index ">
                               <td class="col-md-1">
                                 <button data-ng-click="toggle_leg($index, legis_fav)"><span class="fa fa-trash"></span></button> 
                               </td>
@@ -696,7 +697,7 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr ng-repeat="bill_fav in bill_favbar">
+                            <tr ng-repeat="bill_fav in bill_favbar track by $index">
                               <td class="col-md-1">
                                 <button data-ng-click="toggle_bill($index, bill_fav)"><span class="fa fa-trash"></span></button> 
                               </td>
@@ -735,7 +736,7 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr ng-repeat="comm_fav in committee_favbar">
+                            <tr ng-repeat="comm_fav in committee_favbar track by $index">
                               <td class="col-md-1"> 
                                 <button data-ng-click="toggle_comm($index, comm_fav)"><span class="fa fa-trash"></span></button> 
                               </td>
