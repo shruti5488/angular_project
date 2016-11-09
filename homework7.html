@@ -209,7 +209,8 @@
                                   <td class="col-md-3" style="padding: 5px;"> {{ detail.title }} {{ 	detail.last_name}} {{ detail.first_name }} </td>
                                 </tr>
                                 <tr>
-                                  <td class="row_height" style="padding: 5px;"> {{ detail.oc_email }} 	</td>
+                                  <td class="row_height" style="padding: 5px;" id="email_leg">
+                                  <a>{{ detail.oc_email }}</a></td>
                                 </tr>
                                 <tr>
                                   <td class="row_height" style="padding: 5px;"> Chamber: 	{{detail.chamber }} </td>
@@ -430,7 +431,9 @@
                   </div>
                   <div class="item">
                     <div class="panel panel-default">
-                      <span class="left carousel-control fa fa-chevron-left details_icon" href="#carousel_bill" data-slide="prev"></span>
+                      <a class="left carousel-control details_icon" href="#carousel_bill" data-slide="prev">
+                        <i class="fa fa-chevron-left "></i>
+                      </a>
                         <div class="view_details_style">
                           <h4 id="details_leg"> Details</h4> 
                           <button data-ng-click="toggle_bill($index, bill_detail)" class="star_border">
