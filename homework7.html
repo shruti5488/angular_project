@@ -186,9 +186,15 @@
                   </div> <!--- item active close-->
                   <div class="item">
                     <div class="panel panel-default">
-                      <span class="left carousel-control fa fa-chevron-left details_icon" href="	#carousel-example-generic" data-slide="prev"></span>
-                      <h4 id="details_leg">	Details</h4>
-                      <button data-ng-click="toggle_leg($index, detail)"><span class="fa fa-star-o"></span></button> 
+                      <a class="left carousel-control details_icon" href="#carousel-example-generic" data-slide="prev">
+                        <i class="fa fa-chevron-left "></i>
+                      </a>
+                      <div class="view_details_style">
+                        <h4 id="details_leg">	Details</h4>
+                        <button data-ng-click="toggle_leg($index, detail)" class="star_border">
+                          <i ng-class="{'fa fa-star-o': !detail.fav, 'fa fa-star yellow': detail.fav}"></i>
+                        </button> 
+                      </div>
                       <hr class="hr_panel">
                       <div class="panel-body" style="padding-top: 5px;">
                         <div class="col-md-6">
@@ -425,7 +431,12 @@
                   <div class="item">
                     <div class="panel panel-default">
                       <span class="left carousel-control fa fa-chevron-left details_icon" href="#carousel_bill" data-slide="prev"></span>
-                      <h4 id="details_leg"> Details</h4> <button data-ng-click="toggle_bill($index, bill_detail)"><span class="fa fa-star-o"></span></button> 
+                        <div class="view_details_style">
+                          <h4 id="details_leg"> Details</h4> 
+                          <button data-ng-click="toggle_bill($index, bill_detail)" class="star_border">
+                            <i ng-class="{'fa fa-star-o': !bill_detail.fav, 'fa fa-star yellow': bill_detail.fav}"></i>
+                          </button>
+                        </div> 
                       <hr class="hr_panel">
                       <div class="panel-body" style="padding-top: 5px;">
                           <div class="col-md-6">
@@ -524,8 +535,8 @@
                                 <tbody>
                                   <tr dir-paginate="comm_house in comms_house | filter:comm_search | itemsPerPage: pageSize " pagination-id="committee_house" current-page="currentPage">
                                   	<td class="col-md-1">
-                                      <button data-ng-click="toggle_comm($index, comm_house)">
-                                       <i ng-class="{'fa fa-star-o': autofav, 'fa fa-star yellow': !autofav}"></i>
+                                      <button data-ng-click="toggle_comm($index, comm_house)" class="star_border">
+                                       <i ng-class="{'fa fa-star-o': !comm_house.fav, 'fa fa-star yellow': comm_house.fav}"></i>
                                       </button> 
                                     </td>
                                   	<td class="col-md-1"> 
@@ -568,13 +579,17 @@
                                 </thead>
                                 <tbody>
                                   <tr dir-paginate="comm_senate in comms_senate | filter:comm_search | itemsPerPage: pageSize" pagination-id="committee_senate" current-page="currentPage">
-                                    <td class="col-md-1"> <button data-ng-click="toggle_comm($index, comm_senate)"><span class="fa fa-star-o"></span></button> </td>
+                                    <td class="col-md-1"> 
+                                      <button data-ng-click="toggle_comm($index, comm_senate)" class="star_border">
+                                        <i ng-class="{'fa fa-star-o': !comm_senate.fav, 'fa fa-star yellow': comm_senate.fav}"></i>
+                                      </button> 
+                                    </td>
                                     <td class="col-md-1"> 
                                         <img ng-src="{{ senate }}" style="width:40%";> {{ comm_senate.chamber | capitalize}} 
                                     </td>
                                     <td class="col-md-2"> {{ comm_senate.committee_id | uppercase}} </td>
                                     <td class="col-md-6"> {{ comm_senate.name | capitalize }} </td>
-                                    <td class="col-md-2"> {{comm_senate.parent_committee_id | uppercase}}</td>
+                                    <td class="col-md-2"> {{ comm_senate.parent_committee_id | uppercase}}</td>
                                   </tr>
                                   </tbody>
                               </table>
@@ -604,7 +619,11 @@
                                 </thead>
                                 <tbody>
                                   <tr dir-paginate="comm_joint in comms_joint | filter:comm_search | itemsPerPage: pageSize"  pagination-id="committee_joint" current-page="currentPage">
-                                    <td class="col-md-2"><button data-ng-click="toggle_comm($index, comm_joint)"><span class="fa fa-star-o"></span></button> </i></td>
+                                    <td class="col-md-2">
+                                      <button data-ng-click="toggle_comm($index, comm_joint)" class="star_border">
+                                        <i ng-class="{'fa fa-star-o': !comm_joint.fav, 'fa fa-star yellow': comm_joint.fav}"></i>
+                                      </button> 
+                                    </td>
                                     <td class="col-md-2"> 
                                         <img ng-src="{{ senate }}" style="width:40%";> {{ comm_joint.chamber | capitalize}} 
                                     </td>
@@ -658,18 +677,18 @@
                           <tbody>
                             <tr ng-repeat="legis_fav in legislator_favbar track by $index ">
                               <td class="col-md-1">
-                                <button data-ng-click="toggle_leg($index, legis_fav)"><span class="fa fa-trash"></span></button> 
+                                <button data-ng-click="delete_leg($index, legis_fav)"><span class="fa fa-trash"></span></button> 
                               </td>
                               <td class="col-md-2">
-                                <img ng-src="{{ legis_fav.pic }}" class="pic_fav"> 
+                                <img ng-src="{{ legis_fav.pic_url }}" class="pic_fav"> 
                               </td>
-                              <td class="col-md-1"> <img ng-src="{{ legis_fav.party }}" class="party_fav"> </td>
-                              <td>{{legis_fav.value.last_name}}, {{legis_fav.value.first_name}} </td>
+                              <td class="col-md-1"> <img ng-src="{{ legis_fav.party_symb }}" class="party_fav"> </td>
+                              <td>{{legis_fav.last_name}}, {{legis_fav.first_name}} </td>
                               <td class="col-md-2"> 
-                                <img ng-src="{{ legis_fav.chamber }}" class="party_fav"> {{legis_fav.value.chamber}} 
+                                <img ng-src="{{ legis_fav.chamber_pic }}" class="party_fav"> {{legis_fav.chamber}} 
                               </td>
-                              <td class="col-md-2"> {{legis_fav.value.state_name}} </td>
-                              <td class="col-md-2"> {{legis_fav.value.oc_email}} </td>
+                              <td class="col-md-2"> {{legis_fav.state_name}} </td>
+                              <td class="col-md-2"> {{legis_fav.oc_email}} </td>
                               <td class="col-md-2"> 
                                 <button class="btn btn-primary" href="" role="button" data-slide="next" ng-click=""> View Details </button>
                               </td>
@@ -701,16 +720,16 @@
                           <tbody>
                             <tr ng-repeat="bill_fav in bill_favbar track by $index">
                               <td class="col-md-1">
-                                <button data-ng-click="toggle_bill($index, bill_fav)"><span class="fa fa-trash"></span></button> 
+                                <button data-ng-click="delete_bill($index, bill_fav)"><span class="fa fa-trash"></span></button> 
                               </td>
-                              <td class="col-md-2"> {{bill_fav.value.bill_id | uppercase}} </td>
-                              <td class="col-md-1"> {{bill_fav.value.bill_type | uppercase}}</td>
-                              <td class="col-md-2"> {{bill_fav.value.official_title}} </td>
+                              <td class="col-md-2"> {{bill_fav.bill_id | uppercase}} </td>
+                              <td class="col-md-1"> {{bill_fav.bill_type | uppercase}}</td>
+                              <td class="col-md-2"> {{bill_fav.official_title}} </td>
                               <td class="col-md-1"> 
-                                <img ng-src="{{ bill_fav.chamber }}" class="party_fav"> {{bill_fav.value.chamber}} 
+                                <img ng-src="{{ bill_fav.chamber_pic }}" class="party_fav"> {{bill_fav.chamber}} 
                               </td>
-                              <td class="col-md-2"> {{bill_fav.value.introduced_on | date}} </td>
-                              <td class="col-md-2"> {{bill_fav.value.sponsor.title}}. {{bill_fav.value.sponsor.last_name}}, {{bill_fav.value.sponsor.first_name}} </td>
+                              <td class="col-md-2"> {{bill_fav.introduced_on | date}} </td>
+                              <td class="col-md-2"> {{bill_fav.sponsor.title}}. {{bill_fav.sponsor.last_name}}, {{bill_fav.sponsor.first_name}} </td>
                               <td class="col-md-1"> 
                                 <button class="btn btn-primary" href="" role="button" data-slide="next" ng-click=""> View Details </button>
                               </td>
@@ -740,15 +759,15 @@
                           <tbody>
                             <tr ng-repeat="comm_fav in committee_favbar track by $index">
                               <td class="col-md-1"> 
-                                <button data-ng-click="toggle_comm($index, comm_fav)"><span class="fa fa-trash"></span></button> 
+                                <button data-ng-click="delete_comm($index, comm_fav)"><span class="fa fa-trash"></span></button> 
                               </td>
                               <td class="col-md-1"> 
-                                <img ng-src="{{ comm_fav.chamber }}" class="party_fav"> {{comm_fav.value.chamber}} 
+                                <img ng-src="{{ comm_fav.chamber_pic }}" class="party_fav"> {{comm_fav.chamber}} 
                               </td>
-                              <td class="col-md-1"> {{comm_fav.value.committee_id | uppercase}} </td>
-                              <td class="col-md-2"> {{comm_fav.value.name}}</td>
-                              <td class="col-md-2"> {{comm_fav.value.parent_committee_id}} </td>
-                              <td class="col-md-2"> {{comm_fav.value.subcommittee}} </td>
+                              <td class="col-md-1"> {{comm_fav.committee_id | uppercase}} </td>
+                              <td class="col-md-2"> {{comm_fav.name}}</td>
+                              <td class="col-md-2"> {{comm_fav.parent_committee_id}} </td>
+                              <td class="col-md-2"> {{comm_fav.subcommittee}} </td>
                             </tr>
                           </tbody>
                         </table>
