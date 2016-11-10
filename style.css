@@ -9,6 +9,38 @@
 #congress{
   margin-top: 10px;
 }
+
+.congress_logo {
+    display: block;
+    vertical-align: bottom;
+    padding: 15px 20px;
+    font-weight: 700;
+    font-size: 17px;
+    color: black;
+    background-color: white;
+    width:100%;
+}
+
+#div_logo{
+  width:300px;
+  margin-left: auto;
+  margin-right: auto;
+  float:none;
+}
+
+
+#logo {
+    height:23px;
+    width: 96px;
+}
+
+
+#logo_img {
+    text-decoration: none;
+    color:black;
+}
+
+
 .navbar-header {
     display: block;
     float: left;
@@ -102,6 +134,8 @@
 .panel-heading{
 background-color: #f5f5f5;
 border-color: #ddd;
+display: inline-flex;
+    width: 100%;
 }
 .panel-body{
   font-size: small;
@@ -136,7 +170,7 @@ a{
 .sub_icon {
 	display: inline;
 	padding-right: 12px;
-	padding-left: 20px;
+	padding-left: 25px;
 
 }
 .fa-star-o {
@@ -150,7 +184,8 @@ a{
   -webkit-text-stroke-color: black;
 }
 .dropdown {
-  float: right;
+  /*float: right;*/
+  margin-left: auto;
 }
 .details_icon{
   border: 1px solid gray;
@@ -217,7 +252,6 @@ a{
 
 
 @media (max-width: 767px) {
-  
 
   #wrapper {
   padding-left: 0;
@@ -246,10 +280,10 @@ a{
   overflow-x: hidden;
 }
 #wrapper.active #sidebar-wrapper {
-  width: 71px;
+  width: 50px;
 }
 #page-content-wrapper {
-  width: 90%;
+  width: 107%;
   position: absolute;
   padding: 0px;
   margin-left: 0px;
@@ -257,12 +291,10 @@ a{
 #wrapper.active #page-content-wrapper {
   position: absolute;
   margin-right: -250px;
-      margin-left: -190px;
+  margin-left: -77px;
+  margin-top: 55px;
 }
 
-.form-control {
-  width: 151px;
-}
 }
 
 @media (min-width: 1200px){

@@ -17,20 +17,21 @@
   </head>
 <body class="serif">
   <nav class="navbar navbar-default navbar-fixed-top">
-    <div>
-      <ul class="navbar-header">
-        <li><a id="menu-toggle" href="#"><span idmain_icon" class="fa fa-bars"></span></a></>
-      </ul>
-    </div>
+      <div class="congress_logo"><div style="display:block;float:left;">
+      <a id="menu-toggle" href="" style="color: black;"><i class="fa fa-bars" aria-hidden="true"></i></a>
+      </div>
+      <div id="div_logo" style="display:block;">
+      <a href="http://sunlightfoundation.com/" id="logo_img"><img src="http://cs-server.usc.edu:45678/hw/hw8/images/logo.png" id="logo">  Congress API</a>
+      </div>
   </nav>
   <div ng-app='myApp' ng-controller="mainController">
     <div id="wrapper" class="active">
       <div id="sidebar-wrapper">
         <ul class="sidebar-nav" id="sidebar">
-          <li><a class="tab" href="javascript:void(" ng-click="view_leg()"><span class="sub_icon fa fa-user"></span>Legislators</a></li>
-          <li><a class="tab" href="javascript:void(" ng-click="view_bill()"><span class="sub_icon fa fa fa-file-o"	></span>Bills</a></li>
-          <li><a class="tab" href="javascript:void(" ng-click="view_comm()"><span class="sub_icon fa fa-sign-in"></span>Committees</a></li>
-          <li><a class="tab" href="javascript:void(" ng-click="view_fav()"><span class="sub_icon fa fa fa-star"></span>Favorites</a>></li>
+          <li><a class="tab" href="javascript:void(0)" ng-click="view_leg()"><span class="sub_icon fa fa-user"></span>Legislators</a></li>
+          <li><a class="tab" href="javascript:void(0)" ng-click="view_bill()"><span class="sub_icon fa fa fa-file-o"	></span>Bills</a></li>
+          <li><a class="tab" href="javascript:void(0)" ng-click="view_comm()"><span class="sub_icon fa fa-sign-in"></span>Committees</a></li>
+          <li><a class="tab" href="javascript:void(0)" ng-click="view_fav()"><span class="sub_icon fa fa fa-star"></span>Favorites</a>></li>
         </ul>
       </div>
       <div id="page-content-wrapper">
@@ -52,7 +53,7 @@
                       </div>
                       <div class="panel panel-default reduce_panel">
                         <div class="tab-content">
-                          <div id="state" class="tab-pane fade in active 	table-responsive">
+                          <div id="state" class="tab-pane fade in active table-responsive">
                             <div class="panel-heading">
                               Legislators By State
                               <select ng-model="boxmodel" class="dropdown">
