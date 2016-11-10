@@ -3,6 +3,28 @@ var app = angular.module('myApp', ['angularUtils.directives.dirPagination']);
 
 app.controller('mainController', function($scope, $http){
 
+    // var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    // var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+
+    // var view;
+    // if ( w > 500) {
+    //   view = "large";
+    // }
+    // else {
+    //   view = "small"; 
+    // }
+    // $scope.view = view;
+    // $scope.window_width = w;
+    // $scope.width = document.body.scrollWidth;
+    // $scope.$watch('width',function(newValue, oldValue, scope) {
+    //   debugger;
+    //    // $scope.view = newValue;
+    // },true);
+
+    // $scope.width.bind('view',function() {
+    //   $scope.$apply();
+    // });
+
     $scope.autofav = true;
     $scope.legislator_show = true;
     $scope.bill_show = false;
@@ -39,7 +61,6 @@ app.controller('mainController', function($scope, $http){
     });
 
     $scope.view_leg = function () {
-      debugger;
       $scope.legislator_show = true;
       $scope.bill_show = false;
       $scope.committee_show = false;
@@ -355,7 +376,7 @@ app.controller('mainController', function($scope, $http){
       $scope.committee_favbar = JSON.parse(localStorage.getItem('committee_storage'));
     }
     
-    $scope.view_legislator = function(legislator_details){      
+    $scope.view_legislator = function(legislator_details) {      
       $scope.detail = legislator_details;
       
       var str = "string";
@@ -429,6 +450,11 @@ app.controller('mainController', function($scope, $http){
     $scope.item = {
       star: false
     };
+
+    $("#menu-toggle").click(function(e) {
+ e.preventDefault();
+ $("#wrapper").toggleClass("active");
+});
 });
 
 
@@ -437,6 +463,35 @@ app.filter('capitalize', function() {
     return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
   }
 });
+
+app.directive('resize', function ($window) {
+    return function (scope, element) {
+        var w = angular.element($window);
+        scope.getWindowDimensions = function () {
+            return {
+                'h': w.height(),
+                'w': w.width()
+            };
+        };
+        scope.$watch(scope.getWindowDimensions, function (newValue, oldValue) {
+            scope.windowHeight = newValue.h;
+            scope.windowWidth = newValue.w;
+
+              if (newValue.w-100 >500) {
+                scope.view = "large";
+              } else {
+                scope.view = "small";
+              }
+        }, true);
+
+        w.bind('resize', function () {
+            scope.$apply();
+        });
+    }
+})
+
+
+
 
 
 // var body_message = "Hello!";

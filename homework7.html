@@ -15,24 +15,23 @@
     <script src="application.js"></script>
     <script src="dirPagination.js"></script>
   </head>
-  <body class="serif">
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div>
-        <ul class="navbar-header">
-          <li><a id="menu-toggle" href="#"><span id="main_icon" class="fa fa-bars"></span></a></li>
+<body class="serif">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div>
+      <ul class="navbar-header">
+        <li><a id="menu-toggle" href="#"><span idmain_icon" class="fa fa-bars"></span></a></>
+      </ul>
+    </div>
+  </nav>
+  <div ng-app='myApp' ng-controller="mainController">
+    <div id="wrapper" class="active">
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav" id="sidebar">
+          <li><a class="tab" href="javascript:void(" ng-click="view_leg()"><span class="sub_icon fa fa-user"></span>Legislators</a></li>
+          <li><a class="tab" href="javascript:void(" ng-click="view_bill()"><span class="sub_icon fa fa fa-file-o"	></span>Bills</a></li>
+          <li><a class="tab" href="javascript:void(" ng-click="view_comm()"><span class="sub_icon fa fa-sign-in"></span>Committees</a></li>
+          <li><a class="tab" href="javascript:void(" ng-click="view_fav()"><span class="sub_icon fa fa fa-star"></span>Favorites</a>></li>
         </ul>
-      </div>
-    </nav>
-    <div ng-app='myApp' ng-controller="mainController">
-      <div id="wrapper" class="active">
-        <div id="sidebar-wrapper">
-          <ul class="sidebar-nav" id="sidebar">
-            <li><a class="tab" href="javascript:void(0)" ng-click="view_leg()"><span class="sub_icon fa fa-user"></span>Legislators</a></li>
-            <li><a class="tab" href="javascript:void(0)" ng-click="view_bill()"><span class="sub_icon fa fa fa-file-o"	></span>Bills</a></li>
-            <li><a class="tab" href="javascript:void(0)" ng-click="view_comm()"><span class="sub_icon fa fa-sign-in"></span>Committees</a></li>
-            <li><a class="tab" href="javascript:void(0)" ng-click="view_fav()"><span class="sub_icon fa fa fa-star"></span>Favorites</a	></li>
-          </ul>
-        </div>
       </div>
       <div id="page-content-wrapper">
         <div class="page-content inset">
@@ -785,5 +784,6 @@
         </div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
 </html>
