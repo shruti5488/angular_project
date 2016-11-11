@@ -4,6 +4,12 @@
 .serif {
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
+.fa-trash:hover{
+  color: red;
+}
+.pos_inherit{
+  position: inherit;
+}
 .nav_congessImage{
   display: inline-flex;
   height: 40px;
@@ -118,6 +124,10 @@
 #details_leg{
   padding-left: 40px;
   width: 95%;
+}
+.details_fav{
+  padding-left: 10px;
+  width: 92%;
 }
 .view_details_style{
   display: inline-flex;

@@ -4,10 +4,11 @@
     
     if($data->data == "string"){
     	$bio = $data->bioguide_id;
-    	$bill = "http://congress.api.sunlightfoundation.com/bills?sponsor_id=".$bio."&apikey=dc64b50ea0094b8794a3a8d96db12f86";
+    	$bill = "http://104.198.0.197:8080/bills?sponsor_id=".$bio."&apikey=dc64b50ea0094b8794a3a8d96db12f86&per_page=5";
     	$json_bill = file_get_contents($bill);
 
-    	$committee = "http://congress.api.sunlightfoundation.com/committees?chamber=senate&member_ids=".$bio."&apikey=dc64b50ea0094b8794a3a8d96db12f86";
+    	// $committee = "http://congress.api.sunlightfoundation.com/committees?member_ids=".$bio."&apikey=dc64b50ea0094b8794a3a8d96db12f86";
+    	$committee = "http://104.198.0.197:8080/committees?member_ids=".$bio."&apikey=dc64b50ea0094b8794a3a8d96db12f86&per_page=5";
     	$json_comm = file_get_contents($committee);
 
     	$json_string = array($json_comm, $json_bill);

@@ -74,24 +74,19 @@
                                     </tr>
                                     <tr dir-paginate="leg in legs | filter:{state_name:boxmodel}:true | orderBy:['state_name', 'last_name'] | itemsPerPage:pageSize" current-page="currentPage" pagination-id="legislator_state" ng-switch on="leg.chamber">
                                       <td class="col-md-2"> 
-                                      	<div ng-switch-when='house'>
-                                      			<img ng-src="{{ party_house }}" style="width:20%";> 
-                                      	</div>
-                                      	<div ng-switch-when='senate'>
-                                      			<img ng-src="{{ party_senate }}" style="width:20%";> 
-                                      	</div>
+                                      	<img ng-src="{{ leg.party_image }}" style="width:20%";> 
                                       </td>
                                       <td class="col-md-3"> {{ leg.last_name }}, {{leg.first_name }} </td>
                                       <td class="col-md-2"> 
                                       	<div ng-switch-when='house'>
-                                      			<img ng-src="{{ house }}" style="width:20%";> {{ leg.chamber }} 
+                                      			<img ng-src="{{ house }}" style="width:20%";> {{ leg.chamber | capitalize }} 
                                       	</div>
                                       	<div ng-switch-when='senate'>
-                                      			<img ng-src="{{ senate }}" style="width:20%";> {{ leg.chamber }} 
+                                      			<img ng-src="{{ senate }}" style="width:20%";> {{ leg.chamber | capitalize }} 
                                       	</div>
                                       	
                                       </td>
-                                      <td class="col-md-2"> District {{ leg.district }} </td>
+                                      <td class="col-md-2"> {{ leg.district }} </td>
                                       <td class="col-md-2"> {{ leg.state_name }} </td>
                                       <td class="col-md-2">
                                       	<button class="btn btn-primary" href="#carousel-example-generic" role="button" data-slide="next" ng-click="view_legislator(leg);"> View Details </button>
@@ -124,11 +119,11 @@
                                     </tr>
                                     <tr dir-paginate="leg_house in legs_house | filter:q | orderBy:'last_name'| itemsPerPage: pageSize"  pagination-id="legislator_house" current-page="currentPage">
                                       <td class="col-md-2">
-                                      	<img ng-src="{{ party_house }}" style="width:20%";> 
+                                      	<img ng-src="{{ leg_house.party_image }}" style="width:20%";> 
                                       </td>
                                       <td class="col-md-2"> {{ leg_house.last_name }}, {{ leg_house.first_name}} </td>
-                                      <td class="col-md-2"> <img ng-src="{{ house }}" style="width:20%";> {{ leg_house.chamber }} </td>
-                                      <td class="col-md-2"> District {{ leg_house.district }}</td>
+                                      <td class="col-md-2"> <img ng-src="{{ house }}" style="width:20%";> {{ leg_house.chamber | capitalize}} </td>
+                                      <td class="col-md-2">{{ leg_house.district }}</td>
                                       <td class="col-md-2"> {{ leg_house.state_name}}</td>
                                       <td class="col-md-2">
                                       	<button class="btn btn-primary" href="#carousel-example-generic" role="button" data-slide="next" ng-click="view_legislator(leg_house);"> View Details </button>
@@ -162,11 +157,11 @@
                                     </tr>
                                     <tr dir-paginate="leg_senate in legs_senate | filter:q | orderBy:'last_name' | itemsPerPage: pageSize "  pagination-id="legislator_senate" current-page="currentPage">
                                       <td class="col-md-2"> 
-                                        <img ng-src="{{ party_senate }}" style="width:20%";> 
+                                       <img ng-src="{{ leg_senate.party_image }}" style="width:20%";> 
                                       </td>
                                       <td class="col-md-2"> {{ leg_senate.last_name }}, {{leg_senate.first_name }} </td>
                                       <td class="col-md-2"> 
-                                      <img ng-src="{{ senate }}" style="width:20%";> {{ leg_senate.chamber }} </td>
+                                      <img ng-src="{{ senate }}" style="width:20%";> {{ leg_senate.chamber | capitalize }} </td>
                                       <td class="col-md-2" > {{ leg_senate.state_name }} </td>
                                       <td class="col-md-2">
                                         <button class="btn btn-primary" href="#carousel-example-generic" role="button" data-slide="next" ng-click="view_legislator(leg_senate);"> View Details </button>
@@ -205,7 +200,7 @@
                                     <td style="padding: 5px;"></td>
                                   </tr>
                                   <tr>
-                                    <td class="col-md-3" style="padding: 5px;"> {{ detail.title }} {{ 	detail.last_name}} {{ detail.first_name }} </td>
+                                    <td class="col-md-3" style="padding: 5px;"> {{ detail.title }}. {{ 	detail.last_name}} {{ detail.first_name }} </td>
                                   </tr>
                                   <tr>
                                     <td class="row_height" style="padding: 5px;" id="email_leg">
@@ -214,7 +209,7 @@
                                     </td>
                                   </tr>
                                   <tr>
-                                    <td class="row_height" style="padding: 5px;"> Chamber: 	{{detail.chamber }} </td>
+                                    <td class="row_height" style="padding: 5px;"> Chamber: 	{{detail.chamber | capitalize}} </td>
                                   </tr>
                                   <tr>
                                     <td class="row_height" style="padding: 5px;">
@@ -291,7 +286,7 @@
                                 </thead>
                                 <tbody>
                                   <tr ng-repeat="leg_comm in leg_comms">
-                                    <td> {{ leg_comm.chamber }} </td>
+                                    <td> {{ leg_comm.chamber | capitalize}} </td>
                                     <td> {{ leg_comm.committee_id }} </td>
                                     <td> {{ leg_comm.name }} </td>
                                   </tr>
@@ -313,10 +308,10 @@
                                 </thead>
                                 <tbody>
                                   <tr ng-repeat="leg_bill in leg_bills">
-                                    <td> {{ leg_bill.bill_id }} </td>
+                                    <td> {{ leg_bill.bill_id | uppercase}} </td>
                                     <td> {{ leg_bill.official_title }} </td>
-                                    <td> {{ leg_bill.chamber }} </td>
-                                    <td> {{ leg_bill.bill_type }} </td>
+                                    <td> {{ leg_bill.chamber | capitalize}} </td>
+                                    <td> {{ leg_bill.bill_type | uppercase }} </td>
                                     <td> {{ leg_bill.congress }} </td>
                                     <td> <a href="{{ leg_bill.last_version.urls.pdf }}" target="_blank">	Link</a> </td>
                                   </tr>
@@ -485,7 +480,11 @@
                                     </tr>
                                     <tr>
                                       <td> Congress URL </td>
-                                      <td> <a href=" {{bill_detail.urls.congress}}" target="_blank">URL</a> </td>
+                                      <td> 
+                                        <a ng-show="congress_url_present" href=" {{bill_detail.urls.congress}}" target="_blank">URL</a> 
+                                        <p ng-show="congress_url_absent">N.A</p> 
+
+                                      </td>
                                     </tr>
                                     <tr>
                                       <td> Version Status </td>
@@ -493,7 +492,10 @@
                                     </tr>
                                     <tr>
                                       <td> Bill URL </td>
-                                      <td> <a href=" {{bill_detail.last_version.urls.pdf}}" target="_blank">URL</a> </td>
+                                      <td> 
+                                        <a ng-show="bill_link_present" href=" {{bill_detail.last_version.urls.pdf}}" target="_blank">Link</a> 
+                                        <p ng-show="bill_link_absent">N.A</p> 
+                                      </td>
                                     </tr>
                                   </tbody>
                                 </table>
@@ -637,7 +639,7 @@
                                         </button> 
                                       </td>
                                       <td class="col-md-2"> 
-                                          <img ng-src="{{ senate }}" style="width:40%";> {{ comm_joint.chamber | capitalize}} 
+                                          <img ng-src="{{ senate }}" style="width:20%";> {{ comm_joint.chamber | capitalize}} 
                                       </td>
                                       <td class="col-md-3"> {{ comm_joint.committee_id | uppercase}} </td>
                                       <td class="col-md-5"> {{ comm_joint.name | capitalize }} </td>
@@ -655,10 +657,12 @@
                     </div>
               </div>
               <div ng-hide="fav_hide" ng-show="fav_show">
-                <h1>Favorites</h1>
-                <hr style="border-color: silver;">
-                <div class="item active">
-                    <div class="panel panel-default">
+                <div id="carousel_fav" class="carousel slide" data-ride="carousel" data-interval="false">
+                  <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                      <h1>Favorites</h1>
+                      <hr style="border-color: silver;">
+                      <div class="panel panel-default">
                       <div class="panel-body">
                         <ul class="nav nav-tabs">
                           <li class="active"><a class="no_color" data-toggle="tab" href="#legislator_favorite">Legislators</a></li>
@@ -669,15 +673,12 @@
                       <div class="panel panel-default reduce_panel">
                         <div class="tab-content">
                           <div id="legislator_favorite" class="tab-pane fade in active table-responsive">
-                            <div id="carousel-fav-leg" class="carousel slide" data-ride="carousel" data-interval="false">
-                              <div class="carousel-inner" role="listbox">
-                                <div class="item active">
-                                  <div class="panel-heading">
+                            <div class="panel-heading">
                                     <div class="row">
                                       <div class="col-xs-12">Favourite Legislators</div>
                                     </div>
-                                  </div>
-                                  <div class="panel-body">
+                            </div>
+                            <div class="panel-body">
                                     <table class="table table-hover">
                                       <thead>
                                         <tr>
@@ -701,162 +702,25 @@
                                           <td class="col-md-1"> <img ng-src="{{ legis_fav.party_symb }}" class="party_fav"> </td>
                                           <td>{{legis_fav.last_name}}, {{legis_fav.first_name}} </td>
                                           <td class="col-md-2"> 
-                                            <img ng-src="{{ legis_fav.chamber_pic }}" class="party_fav"> {{legis_fav.chamber}} 
+                                            <img ng-src="{{ legis_fav.chamber_pic }}" class="party_fav"> {{legis_fav.chamber | capitalize}} 
                                           </td>
                                           <td class="col-md-2"> {{legis_fav.state_name}} </td>
                                           <td class="col-md-2"> {{legis_fav.oc_email}} </td>
                                           <td class="col-md-2"> 
-                                            <button class="btn btn-primary" href="carousel-fav-leg" role="button" data-slide="next" ng-click="view_legislator(legis_fav);"> View Details </button>
+                                            <button class="btn btn-primary" href="#carousel_fav" role="button" data-slide="next" ng-click="view_legislator(legis_fav);"> View Details </button>
                                           </td>
                                         </tr>
                                       </tbody>
                                     </table>
-                                  </div>
-                                </div>
-                                <div class="item">
-                                  <div class="panel panel-default">
-                                    <a class="left carousel-control details_icon" href="#carousel-fav-leg" data-slide="prev">
-                                      <i class="fa fa-chevron-left "></i>
-                                    </a>
-                                    <div class="view_details_style">
-                                      <h4 id="details_leg"> Details</h4>
-                                      <button data-ng-click="toggle_leg($index, detail)" class="star_border">
-                                        <i ng-class="{'fa fa-star-o': !detail.fav, 'fa fa-star yellow': detail.fav}"></i>
-                                      </button> 
-                                    </div>
-                                    <hr class="hr_panel">
-                                    <div class="panel-body" style="padding-top: 5px;">
-                                      <div class="col-md-6">
-                                        <div class="table-responsive">
-                                          <table class="table">
-                                            <tbody>
-                                              <tr>
-                                                <td rowspan="6" class="col-md-3"><img ng-src="{{ photo }}" class="legis_image"></td>
-                                                <td style="padding: 5px;"></td>
-                                              </tr>
-                                              <tr>
-                                                <td class="col-md-3" style="padding: 5px;"> {{ detail.title }} {{   detail.last_name}} {{ detail.first_name }} </td>
-                                              </tr>
-                                              <tr>
-                                                <td class="row_height" style="padding: 5px;" id="email_leg">
-                                                <a>{{ detail.oc_email }}</a></td>
-                                              </tr>
-                                              <tr>
-                                                <td class="row_height" style="padding: 5px;"> Chamber:  {{detail.chamber }} </td>
-                                              </tr>
-                                              <tr>
-                                                <td class="row_height" style="padding: 5px;">Contact: {{  detail.phone }} </td>
-                                              </tr>
-                                              <tr>
-                                                <td class="row_height" style="padding: 5px;"> <img ng-src="{{ party_image }}" style="width:20%";>   {{party_name}} </td>
-                                              </tr>
-                                            </tbody>
-                                            <table class="table">
-                                              <tr>
-                                                <td>Start term</td>
-                                                <td>{{detail.term_start | date}} </td>
-                                              </tr>
-                                              <tr>
-                                                <td>End Term</td>
-                                                <td>{{detail.term_end | date}} </td>
-                                              </tr>
-                                              <tr>
-                                                <td>Term</td>
-                                                <td>
-                                                  <div class="progress">
-                                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{ term }}" aria-valuemin="0" aria-valuemax="100" style="width:60 %;">
-                                                      60%
-                                                    </div>
-                                                  </div>
-                                                </td>
-                                              </tr>
-                                              <tr>
-                                                <td class="col-md-2">Office</td>
-                                                <td class="col-md-4">{{detail.office}}</td>
-                                              </tr>
-                                              <tr>
-                                                <td class="col-md-2">State</td>
-                                                <td class="col-md-4"> {{detail.state_name}} </td>
-                                              </tr>
-                                              <tr>
-                                                <td class="col-md-2">Fax</td>
-                                                <td class="col-md-4"> {{detail.fax}} </td>
-                                              </tr>
-                                              <tr>
-                                                <td class="col-md-2">Birthday</td>
-                                                <td class="col-md-4"> {{ detail.birthday | date}}</td>
-                                              </tr>
-                                              <tr>
-                                                <td class="col-md-2">Social Links</td>
-                                                <td class="col-md-4">
-                                                  <a href="{{ twitter }}" target="_blank"><img ng-src="http://cs-server.usc.edu:45678/hw/hw8/images/t.png " style="width:20%";  ></a>
-                                                  <a href="{{ facebook }}" target="_blank"><img ng-src="http://cs-server.usc.edu:45678/hw/hw8/images/f.png" style="width:20%"; ></a>
-                                                  <a href="{{ website }}" target="_blank"><img ng-src="http://cs-server.usc.edu:45678/hw/hw8/images/w.png " style="width:20%";  ></a>
-                                                </td>
-                                              </tr>
-                                            </table>
-                                          </table>
-                                        </div>
-                                      </div>
-                                      <div class="col-md-6">
-                                        <h4 class="no-margin">Committees</h4>
-                                        <div class="table-responsive">
-                                          <table class="table table-hover">
-                                            <thead>
-                                              <tr>
-                                                <th>Chamber</th>
-                                                <th>Committee ID</th>
-                                                <th>Name</th>
-                                              </tr>
-                                            </thead>
-                                            <tbody>
-                                              <tr ng-repeat="leg_comm in leg_comms">
-                                                <td> {{ leg_comm.chamber }} </td>
-                                                <td> {{ leg_comm.committee_id }} </td>
-                                                <td> {{ leg_comm.name }} </td>
-                                              </tr>
-                                            </tbody>
-                                          </table>
-                                        </div>
-                                        <h4 class="no-margin">Bills</h4>
-                                        <div class="table-responsive">
-                                          <table class="table">
-                                            <thead>
-                                              <tr>
-                                                <th>Bill ID</th>
-                                                <th>Title</th>
-                                                <th>Chamber</th>
-                                                <th>Bill Type</th>
-                                                <th>Congress</th>
-                                                <th>Link</th>
-                                              </tr>
-                                            </thead>
-                                            <tbody>
-                                              <tr ng-repeat="leg_bill in leg_bills">
-                                                <td> {{ leg_bill.bill_id }} </td>
-                                                <td> {{ leg_bill.official_title }} </td>
-                                                <td> {{ leg_bill.chamber }} </td>
-                                                <td> {{ leg_bill.bill_type }} </td>
-                                                <td> {{ leg_bill.congress }} </td>
-                                                <td> <a href="{{ leg_bill.last_version.urls.pdf }}" target="_blank">  Link</a> </td>
-                                              </tr>
-                                            </tbody>
-                                          </table>
-                                        </div>
-                                      </div>
-                                    </div> <!--- Panel-body div close-->
-                                  </div>
-                                </div>  <!--- item close-->
-                              </div>
                             </div>
                           </div> <!-- legislator_favorite end-->
                           <div id="bill_favorite" class="tab-pane fade table-responsive">
-                                <div class="panel-heading">
+                            <div class="panel-heading">
                                   <div class="row">
                                     <div class="col-xs-12">Favourite Bills</div>
                                   </div>
-                                </div>
-                                <div class="panel-body">
+                            </div>
+                            <div class="panel-body">
                                   <table class="table table-hover">
                                     <thead>
                                       <tr>
@@ -879,17 +743,17 @@
                                         <td class="col-md-1"> {{bill_fav.bill_type | uppercase}}</td>
                                         <td class="col-md-2"> {{bill_fav.official_title}} </td>
                                         <td class="col-md-1"> 
-                                          <img ng-src="{{ bill_fav.chamber_pic }}" class="party_fav"> {{bill_fav.chamber}} 
+                                          <img ng-src="{{ bill_fav.chamber_pic }}" class="party_fav"> {{bill_fav.chamber | capitalize}} 
                                         </td>
                                         <td class="col-md-2"> {{bill_fav.introduced_on | date}} </td>
                                         <td class="col-md-2"> {{bill_fav.sponsor.title}}. {{bill_fav.sponsor.last_name}},         {{bill_fav.sponsor.first_name}} </td>
                                         <td class="col-md-1"> 
-                                          <button class="btn btn-primary" href="" role="button" data-slide="next" ng-click=""> View Details </button>
+                                          <button class="btn btn-primary" href="#carousel_fav" role="button" data-slide="next" ng-click="viewdetail_bill(bill_fav);"> View Details </button>
                                         </td>
                                       </tr>
                                     </tbody>
                                   </table>
-                                </div>
+                            </div>
                           </div> <!-- bill_favorite end-->
                           <div id="committee_favorite" class="tab-pane fadtable-responsive">
                                 <div class="panel-heading">
@@ -912,12 +776,12 @@
                                     <tbody>
                                       <tr ng-repeat="comm_fav in committee_favbar track by $index">
                                         <td class="col-md-1"> 
-                                          <button data-ng-click="delete_comm($index, comm_fav)"><span        class="fa fa-trash"></span></button> 
+                                          <button data-ng-click="delete_comm($index, comm_fav)"><span class="fa fa-trash"></span></button> 
                                         </td>
                                         <td class="col-md-1"> 
-                                          <img ng-src="{{ comm_fav.chamber_pic }}" class="party_fav">        {{comm_fav.chamber}} 
+                                          <img ng-src="{{ comm_fav.chamber_pic }}" class="party_fav">{{comm_fav.chamber | capitalize}} 
                                         </td>
-                                        <td class="col-md-1"> {{comm_fav.committee_id | uppercase}}         </td>
+                                        <td class="col-md-1"> {{comm_fav.committee_id | uppercase}}</td>
                                         <td class="col-md-2"> {{comm_fav.name}}</td>
                                         <td class="col-md-2"> {{comm_fav.parent_committee_id}} </td>
                                         <td class="col-md-2"> {{comm_fav.subcommittee}} </td>
@@ -926,6 +790,233 @@
                                   </table>
                                 </div>
                           </div> <!-- comm_favorite end-->
+                        </div>
+                      </div>
+                      </div>
+                    </div>
+                    <div class= "item">
+                      <div ng-hide="item_legislator">
+                        <h1>Legislator</h1>
+                        <hr style="border-color: silver;">
+                        <div class="panel panel-default">
+                        <!-- <div class="panel heading"> -->
+                          <div class="view_details_style">
+                            <a class="left carousel-control details_icon pos_inherit" href="#carousel_fav" data-slide="prev">
+                              <i class="fa fa-chevron-left "></i>
+                            </a>
+                            <h4 class="details_fav"> Details</h4>
+                            <button data-ng-click="toggle_leg($index, detail)" class="star_border">
+                              <i ng-class="{'fa fa-star-o': !detail.fav, 'fa fa-star yellow': detail.fav}"></i>
+                            </button>
+                          </div>
+                          <hr class="hr_panel">
+                          <!-- </div> -->
+                          <div class="panel-body" style="padding-top: 5px;">
+                            <div class="col-md-6">
+                              <div class="table-responsive">
+                                <table class="table">
+                                  <tbody>
+                                    <tr>
+                                      <td rowspan="6" class="col-md-3"><img ng-src="{{ photo }}" class="legis_image"></td>
+                                      <td style="padding: 5px;"></td>
+                                    </tr>
+                                    <tr>
+                                      <td class="col-md-3" style="padding: 5px;"> {{ detail.title }}. {{   detail.last_name}} {{ detail.first_name }} </td>
+                                    </tr>
+                                    <tr>
+                                      <td class="row_height" style="padding: 5px;" id="email_leg">
+                                        <a ng-hide="email_full" href="mailto:{{ detail.oc_email }}">{{ detail.oc_email }}</a>
+                                        <div ng-hide="email_empty">N.A</div>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td class="row_height" style="padding: 5px;"> Chamber:  {{detail.chamber | capitalize}} </td>
+                                    </tr>
+                                    <tr>
+                                      <td class="row_height" style="padding: 5px;">
+                                      Contact: <a href="tel:{{ detail.phone }}">{{  detail.phone }}</a> 
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td class="row_height" style="padding: 5px;"> <img ng-src="{{ party_image }}" style="width:20%";>   {{party_name}} </td>
+                                    </tr>
+                                  </tbody>
+                                  <table class="table">
+                                    <tr>
+                                      <td>Start term</td>
+                                      <td>{{detail.term_start | date}} </td>
+                                    </tr>
+                                    <tr>
+                                      <td>End Term</td>
+                                      <td>{{detail.term_end | date}} </td>
+                                    </tr>
+                                    <tr>
+                                      <td>Term</td>
+                                      <td>
+                                        <div class="progress">
+                                          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ term }}" aria-valuemin="0" aria-valuemax="100" ng-style="term_style">
+                                            {{ term }}%
+                                          </div>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td class="col-md-2">Office</td>
+                                      <td class="col-md-4">{{detail.office}}</td>
+                                    </tr>
+                                    <tr>
+                                      <td class="col-md-2">State</td>
+                                      <td class="col-md-4"> {{detail.state_name}} </td>
+                                    </tr>
+                                    <tr>
+                                      <td class="col-md-2">Fax</td>
+                                      <td class="col-md-4">  
+                                        <a ng-hide="fax_full" href="fax:{{detail.fax}}"> {{detail.fax}} </a>
+                                        <div ng-hide="fax_empty"">N.A</div>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td class="col-md-2">Birthday</td>
+                                      <td class="col-md-4"> {{ detail.birthday | date}}</td>
+                                    </tr>
+                                    <tr>
+                                      <td class="col-md-2">Social Links</td>
+                                      <td class="col-md-4">
+                                        <a ng-hide="twitter_full" href=" {{twitter}}" target='_blank'><img ng-src='http://cs-server.usc.edu:45678/hw/hw8/images/t.png' style='width:20%';></a>
+                                        <a ng-hide="twitter_empty"></a>
+                                        <a ng-hide="facebook_full" href="{{ facebook }}" target="_blank"><img ng-src="http://cs-server.usc.edu:45678/hw/hw8/images/f.png" style="width:20%";></a>
+                                        <a ng-hide="facebook_empty"></a>
+                                        <a ng-hide="website_full" href="{{ website }}" target="_blank"><img ng-src="http://cs-server.usc.edu:45678/hw/hw8/images/w.png" style="width:20%";></a>
+                                        <a ng-hide="website_empty"></a>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </table>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <h4 class="no-margin">Committees</h4>
+                              <div class="table-responsive">
+                                <table class="table">
+                                  <thead>
+                                    <tr>
+                                      <th>Chamber</th>
+                                      <th>Committee ID</th>
+                                      <th>Name</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr ng-repeat="leg_comm in leg_comms">
+                                      <td> {{ leg_comm.chamber }} </td>
+                                      <td> {{ leg_comm.committee_id }} </td>
+                                      <td> {{ leg_comm.name }} </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                              <h4 class="no-margin">Bills</h4>
+                              <div class="table-responsive">
+                                <table class="table">
+                                  <thead>
+                                    <tr>
+                                      <th>Bill ID</th>
+                                      <th>Title</th>
+                                      <th>Chamber</th>
+                                      <th>Bill Type</th>
+                                      <th>Congress</th>
+                                      <th>Link</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr ng-repeat="leg_bill in leg_bills">
+                                      <td> {{ leg_bill.bill_id }} </td>
+                                      <td> {{ leg_bill.official_title }} </td>
+                                      <td> {{ leg_bill.chamber }} </td>
+                                      <td> {{ leg_bill.bill_type }} </td>
+                                      <td> {{ leg_bill.congress }} </td>
+                                      <td> <a href="{{ leg_bill.last_version.urls.pdf }}" target="_blank">  Link</a> </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                          <!--- Panel-body div close-->
+                        </div>
+                      </div>
+                      <div ng-hide="item_bill_hide" ng-show="item_bill_show">
+                        <h1>Bills</h1>
+                        <hr style="border-color: silver;">
+                          <div class="panel panel-default">
+                          <div class="view_details_style">
+                            <a class="left carousel-control details_icon pos_inherit" href="#carousel_fav" data-slide="prev">
+                             <i class="fa fa-chevron-left "></i>
+                            </a>
+                            <h4 class="details_fav"> Details</h4> 
+                            <button data-ng-click="toggle_bill($index, bill_detail)" class="star_border">
+                              <i ng-class="{'fa fa-star-o': !bill_detail.fav, 'fa fa-star yellow': bill_detail.fav}"></i>
+                            </button>
+                          </div> 
+                          <hr class="hr_panel">
+                          <div class="panel-body" style="padding-top: 5px;">
+                            <div class="col-md-6">
+                              <div class="table-responsive">
+                                <table class="table">
+                                  <tbody>
+                                    <tr>
+                                      <td> Bill ID</td>
+                                      <td> {{bill_detail.bill_id | uppercase}} </td>
+                                    </tr>
+                                    <tr>
+                                      <td> Title </td>
+                                      <td> {{bill_detail.official_title}} </td>
+                                    </tr>
+                                    <tr>
+                                      <td> Bill Type </td>
+                                      <td> {{bill_detail.bill_type | uppercase}} </td>
+                                    </tr>
+                                    <tr>
+                                      <td> Sponsor </td>
+                                      <td> {{bill_detail.sponsor.title}}. {{bill_detail.sponsor.last_name}}, {{bill_detail.sponsor.first_name}} </td>
+                                    </tr>
+                                    <tr>
+                                      <td> Chamber </td>
+                                      <td> {{bill_detail.chamber | capitalize}} </td>
+                                    </tr>
+                                    <tr>
+                                      <td> Status </td>
+                                      <td> {{bill_detail.official_title}} </td>
+                                    </tr>
+                                    <tr>
+                                      <td> Introduced On </td>
+                                      <td> {{bill_detail.introduced_on | date}} </td>
+                                    </tr>
+                                    <tr>
+                                      <td> Congress URL </td>
+                                      <td> 
+                                        <a ng-show="congress_url_present" href="{{bill_detail.urls.congress}}" target="_blank">URL</a> 
+                                        <p ng-show="congress_url_absent">N.A</p>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td> Version Status </td>
+                                      <td> {{bill_detail.last_version.version_name}} </td>
+                                    </tr>
+                                    <tr>
+                                      <td> Bill URL </td>
+                                      <td> 
+                                        <a ng-show="bill_link_present" href=" {{bill_detail.last_version.urls.pdf}}" target="_blank">Link</a> 
+                                        <p ng-show="bill_link_absent">N.A</p> 
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                            <object ng-attr-data="{{ bill_detail.last_version.urls.pdf }}" type="application/pdf" style="width:500px; height:550px;"></object>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
