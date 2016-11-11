@@ -3,28 +3,6 @@ var app = angular.module('myApp', ['angularUtils.directives.dirPagination']);
 
 app.controller('mainController', function($scope, $http){
 
-    // var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-    // var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-
-    // var view;
-    // if ( w > 500) {
-    //   view = "large";
-    // }
-    // else {
-    //   view = "small"; 
-    // }
-    // $scope.view = view;
-    // $scope.window_width = w;
-    // $scope.width = document.body.scrollWidth;
-    // $scope.$watch('width',function(newValue, oldValue, scope) {
-    //   debugger;
-    //    // $scope.view = newValue;
-    // },true);
-
-    // $scope.width.bind('view',function() {
-    //   $scope.$apply();
-    // });
-
     $scope.autofav = true;
     $scope.legislator_show = true;
     $scope.bill_show = false;
@@ -43,19 +21,28 @@ app.controller('mainController', function($scope, $http){
          
     $scope.currentPage = 1;
     $scope.pageSize = 10;
-
     $http({
       method: 'GET',
       url: 'logic.php',
     }).then(function (response) {
+      debugger;
       var json_leg = JSON.parse(response.data[0]);
-      var json_bill_dis = JSON.parse(response.data[1]);
+      var json_bill_dis_active = JSON.parse(response.data[1]);
+      var json_bill_dis_new = JSON.parse(response.data[2]);
+      var json_com_house = JSON.parse(response.data[3]);
+      var json_com_senate = JSON.parse(response.data[4]);
+      var json_com_joint = JSON.parse(response.data[5]);
+      
       $scope.party_house = "http://cs-server.usc.edu:45678/hw/hw8/images/r.png";
       $scope.party_senate = "http://cs-server.usc.edu:45678/hw/hw8/images/d.png";
       $scope.house = "http://cs-server.usc.edu:45678/hw/hw8/images/h.png";
       $scope.senate = "http://cs-server.usc.edu:45678/hw/hw8/images/s.svg";
-      $scope.bills_display = json_bill_dis.results;
+      $scope.new_bills  = json_bill_dis_active.results;
+      $scope.active_bills = json_bill_dis_new.results;
       $scope.legs = json_leg.results;
+      $scope.comms_house = json_com_house.results;
+      $scope.comms_senate = json_com_senate.results;
+      $scope.comms_joint = json_com_joint.results;
       $scope.view_leg(); 
     }, function (response) {
     });
@@ -65,7 +52,6 @@ app.controller('mainController', function($scope, $http){
       $scope.bill_show = false;
       $scope.committee_show = false;
       $scope.fav_show = false;
-      
       var house = [];
       var senate = [];
       var j = 0;
@@ -85,53 +71,55 @@ app.controller('mainController', function($scope, $http){
       var flag = false;
       var fav_legislator = [];
       fav_legislator = JSON.parse(localStorage.getItem('legislator_storage'));
-      if (fav_legislator.length !== 0) {
-        for(var i=0; i<$scope.legs.length; i++) {
-          flag = false;
-          for(var k=0; k<fav_legislator.length; k++) {
-            if(fav_legislator[k].bioguide_id === $scope.legs[i].bioguide_id) {
-              $scope.legs[i].fav = true;
-              flag = true;
+      if (fav_legislator !== null) {
+        if (fav_legislator.length !== 0) {
+          for(var i=0; i<$scope.legs.length; i++) {
+            flag = false;
+            for(var k=0; k<fav_legislator.length; k++) {
+              if(fav_legislator[k].bioguide_id === $scope.legs[i].bioguide_id) {
+                $scope.legs[i].fav = true;
+                flag = true;
+              }
+              else if (flag !== true) {
+                 $scope.legs[i].fav = false;
+              }
             }
-            else if (flag !== true) {
-               $scope.legs[i].fav = false;
+          }
+          for(var i=0; i<$scope.legs_house.length; i++) {
+            flag = false;
+            for(var k=0; k<fav_legislator.length; k++) {
+              if(fav_legislator[k].bioguide_id === $scope.legs_house[i].bioguide_id) {
+                $scope.legs_house[i].fav = true;
+                flag = true;
+              }
+              else if (flag !== true) {
+                $scope.legs_house[i].fav = false;
+              }
+            }
+          }
+          for(var i=0; i<$scope.legs_senate.length; i++) {
+            flag = false;
+            for(var k=0; k<fav_legislator.length; k++) {
+              if(fav_legislator[k].bioguide_id === $scope.legs_senate[i].bioguide_id) {
+                $scope.legs_senate[i].fav = true;
+                flag = true;
+              }
+              else if (flag !== true) {
+                 $scope.legs_senate[i].fav = false;
+              }
             }
           }
         }
-        for(var i=0; i<$scope.legs_house.length; i++) {
-          flag = false;
-          for(var k=0; k<fav_legislator.length; k++) {
-            if(fav_legislator[k].bioguide_id === $scope.legs_house[i].bioguide_id) {
-              $scope.legs_house[i].fav = true;
-              flag = true;
-            }
-            else if (flag !== true) {
-              $scope.legs_house[i].fav = false;
-            }
+        else {
+          for(var i=0; i<$scope.legs.length; i++) {
+            $scope.legs[i].fav = false; 
           }
-        }
-        for(var i=0; i<$scope.legs_senate.length; i++) {
-          flag = false;
-          for(var k=0; k<fav_legislator.length; k++) {
-            if(fav_legislator[k].bioguide_id === $scope.legs_senate[i].bioguide_id) {
-              $scope.legs_senate[i].fav = true;
-              flag = true;
-            }
-            else if (flag !== true) {
-               $scope.legs_senate[i].fav = false;
-            }
+          for(var i=0; i<$scope.legs_house.length; i++) {
+            $scope.legs_house[i].fav = false; 
           }
-        }
-      }
-      else {
-        for(var i=0; i<$scope.legs.length; i++) {
-          $scope.legs[i].fav = false; 
-        }
-        for(var i=0; i<$scope.legs_house.length; i++) {
-          $scope.legs_house[i].fav = false; 
-        }
-        for(var i=0; i<$scope.legs_senate.length; i++) {
-          $scope.legs_senate[i].fav = false; 
+          for(var i=0; i<$scope.legs_senate.length; i++) {
+            $scope.legs_senate[i].fav = false; 
+          }
         }
       }
     }
@@ -184,23 +172,7 @@ app.controller('mainController', function($scope, $http){
       $scope.legislator_show = false;
       $scope.bill_show = true;
       $scope.committee_show = false;
-      $scope.fav_show =  false;     
-      var active_bills = [];
-      var new_bills = [];
-      var j = 0;
-      var k = 0;
-      for(i=0; i<$scope.bills_display.length ; i++){
-        if ($scope.bills_display[i].history.active == false) {
-          new_bills[j] = $scope.bills_display[i];
-          j++;
-        }
-        else{
-          active_bills[k] = $scope.bills_display[i];
-          k++;
-        }
-      }
-      $scope.new_bills = new_bills;
-      $scope.active_bills = active        
+      $scope.fav_show =  false;      
       var flag = false;
       var fav_bill = [];
       fav_bill = JSON.parse(localStorage.getItem('bill_storage'));
@@ -285,44 +257,59 @@ app.controller('mainController', function($scope, $http){
       $scope.bill_show = false;
       $scope.committee_show = true;
       $scope.fav_show = false;
-      var str_comm = "comm_string";
-      $http({
-        method: 'POST',
-        url: 'logic.php',
-        data: {
-          data: str_comm,
-      }
-      }).then(function (response) {
-        var json_com_house = JSON.parse(response.data[0]);
-        var json_com_senate = JSON.parse(response.data[1]);
-        var json_com_joint = JSON.parse(response.data[2]);
-        $scope.comms_house = json_com_house.results;
-        $scope.comms_house_len = json_com_house.count;
-        $scope.comms_senate = json_com_senate.results;
-        $scope.comms_senate_len = json_com_senate.count;
-        $scope.comms_joint = json_com_joint.results;
-      }, function (response) {
-      });
+
       var flag = false;
       var fav_committee = [];
       fav_committee = JSON.parse(localStorage.getItem('committee_storage'));
-      if (fav_committee.length !== 0) {
-        for(var i=0; i<$scope.comms_house.length; i++) {
-          flag = false;
-          for(var k=0; k<fav_committee.length; k++) {
-            if(fav_committee[k].committee_id === $scope.comms_house[i].committee_id) {
-              $scope.comms_house[i].fav = true;
-              flag = true;
+      if (fav_committee !== null) {
+        if (fav_committee.length !== 0) {
+          for(var i=0; i<$scope.comms_house.length; i++) {
+            flag = false;
+            for(var k=0; k<fav_committee.length; k++) {
+              if(fav_committee[k].committee_id === $scope.comms_house[i].committee_id) {
+                $scope.comms_house[i].fav = true;
+                flag = true;
+              }
+              else if (flag !== true) {
+                 $scope.comms_house[i].fav = false;
+              }
             }
-            else if (flag !== true) {
-               $scope.comms_house[i].fav = false;
+          }
+          for(var i=0; i<$scope.comms_senate.length; i++) {
+            flag = false;
+            for(var k=0; k<fav_committee.length; k++) {
+              if(fav_committee[k].committee_id === $scope.comms_senate[i].committee_id) {
+                $scope.comms_senate[i].fav = true;
+                flag = true;
+              }
+              else if (flag !== true) {
+                 $scope.comms_senate[i].fav = false;
+              }
+            }
+          }
+          for(var i=0; i<$scope.comms_joint.length; i++) {
+            flag = false;
+            for(var k=0; k<fav_committee.length; k++) {
+              if(fav_committee[k].committee_id === $scope.comms_joint[i].committee_id) {
+                $scope.comms_joint[i].fav = true;
+                flag = true;
+              }
+              else if (flag !== true) {
+                 $scope.comms_joint[i].fav = false;
+              }
             }
           }
         }
-      }
-      else {
-        for(var i=0; i<$scope.comms_house.length; i++) {
-          $scope.comms_house[i].fav = false; 
+        else {
+          for(var i=0; i<$scope.comms_house.length; i++) {
+            $scope.comms_house[i].fav = false; 
+          }
+          for(var i=0; i<$scope.comms_senate.length; i++) {
+            $scope.comms_senate[i].fav = false; 
+          }
+          for(var i=0; i<$scope.comms_joint.length; i++) {
+            $scope.comms_joint[i].fav = false; 
+          }
         }
       }
     }
@@ -336,9 +323,11 @@ app.controller('mainController', function($scope, $http){
       console.log($scope.committee_favbar);
       var fav_committee = [];
       fav_committee = JSON.parse(localStorage.getItem('committee_storage'));
-      for(var k=0; k<fav_committee.length; k++) {
-        if (fav_committee[k].committee_id === comm_house.committee_id) {
-          flag = false;
+      if (fav_committee !== null) {
+        for(var k=0; k<fav_committee.length; k++) {
+          if (fav_committee[k].committee_id === comm_house.committee_id) {
+            flag = false;
+          }
         }
       }
       if (flag === true)
@@ -421,17 +410,64 @@ app.controller('mainController', function($scope, $http){
       }, function (response) {
         // code to execute in case of error
       });
+      debugger;
       $scope.photo = "https://theunitedstates.io/images/congress/original/" + legislator_details.bioguide_id + ".jpg";
-      $scope.twitter = "https://twitter.com/" + legislator_details.twitter ;
-      $scope.facebook = "https://www.facebook.com/" + legislator_details.facebook_id;
-      $scope.website = legislator_details.website;
+      
+      if (legislator_details.fax === null || legislator_details.fax === undefined) {
+        $scope.fax_empty = false;
+        $scope.fax_full = true;
+      } else {
+        $scope.fax_empty = true;
+        $scope.fax_full = false;
+      }
+
+      if (legislator_details.oc_email === null || legislator_details.oc_email === undefined) {
+        $scope.email_empty = false;
+        $scope.email_full = true;
+      } else {
+        $scope.email_empty = true;
+        $scope.email_full = false;
+      }
+
+      if (legislator_details.twitter_id === undefined || legislator_details.twitter_id === null) {
+        $scope.twitter_empty = false;
+        $scope.twitter_full = true;
+
+      } else {
+         $scope.twitter = "https://twitter.com/" + legislator_details.twitter_id ;
+        $scope.twitter_empty = true;
+        $scope.twitter_full = false;
+      }
+
+      if (legislator_details.facebook_id === undefined || legislator_details.facebook_id === null) {
+        $scope.facebook_empty = false;
+        $scope.facebook_full = true;
+
+      } else {
+        $scope.facebook = "https://www.facebook.com/" + legislator_details.facebook_id;
+        $scope.facebook_empty = true;
+        $scope.facebook_full = false;
+      }
+     
+      if (legislator_details.website === undefined || legislator_details.website === null) {
+        $scope.website_empty = false;
+        $scope.website_full = true;
+      } else {
+        $scope.website = legislator_details.website;
+        $scope.website_empty = true;
+        $scope.website_full = false;
+      }
+      
       var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
-      var today = new Date(2015,01,06);
+      // var today = new Date(2015,01,06);
+      var today = new Date();
       var start_date = new Date(legislator_details.term_start);
       var end_date = new Date(legislator_details.term_end);
       var now_start = Math.round(Math.abs((today.getTime() - start_date.getTime())/(oneDay)));
       var end_start = Math.round(Math.abs((end_date.getTime() - start_date.getTime())/(oneDay)));
       var term = Math.round((now_start/end_start)*100);
+      $scope.term = term;
+      $scope.term_style = {width: term + '%'};
       
       if (legislator_details.party == "R"){
         $scope.party_name = "Representative";
@@ -452,9 +488,9 @@ app.controller('mainController', function($scope, $http){
     };
 
     $("#menu-toggle").click(function(e) {
- e.preventDefault();
- $("#wrapper").toggleClass("active");
-});
+      e.preventDefault();
+      $("#wrapper").toggleClass("active");
+    });
 });
 
 
@@ -463,44 +499,3 @@ app.filter('capitalize', function() {
     return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
   }
 });
-
-app.directive('resize', function ($window) {
-    return function (scope, element) {
-        var w = angular.element($window);
-        scope.getWindowDimensions = function () {
-            return {
-                'h': w.height(),
-                'w': w.width()
-            };
-        };
-        scope.$watch(scope.getWindowDimensions, function (newValue, oldValue) {
-            scope.windowHeight = newValue.h;
-            scope.windowWidth = newValue.w;
-
-              if (newValue.w-100 >500) {
-                scope.view = "large";
-              } else {
-                scope.view = "small";
-              }
-        }, true);
-
-        w.bind('resize', function () {
-            scope.$apply();
-        });
-    }
-})
-
-
-
-
-
-// var body_message = "Hello!";
-// var subject = 'Email';
-// $('#email_leg').click(function() {
-// email = $("#email_leg").val();
-//     var mailto_link = 'mailto:' + email + '?subject=' + subject + '&body=' + body_message;
-
-//     win = window.open(mailto_link, 'emailWindow');
-//     if (win && win.open && !win.closed) win.close();
-
-// });

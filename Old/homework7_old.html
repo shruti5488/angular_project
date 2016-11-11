@@ -1,29 +1,28 @@
   <!DOCTYPE html>
   <html>
-  <head> 
-    <title>Learn!</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script> 
-    <script src="application.js"></script>
-    <script src="dirPagination.js"></script>
-  </head>
+    <head> 
+
+      <title>Learn!</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="style.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script> 
+      <script src="application.js"></script>
+      <script src="dirPagination.js"></script>
+    </head>
   <body class="serif">
     <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="congress_logo">
-        <div style="display:block;float:left;">
-          <a id="menu-toggle" href="" style="color: black;"><i class="fa fa-bars" aria-hidden="true"></i></a>
+        <div class="congress_logo"><div style="display:block;float:left;">
+        <a id="menu-toggle" href="" style="color: black;"><i class="fa fa-bars" aria-hidden="true"></i></a>
         </div>
         <div id="div_logo" style="display:block;">
         <a href="http://sunlightfoundation.com/" id="logo_img"><img src="http://cs-server.usc.edu:45678/hw/hw8/images/logo.png" id="logo">  Congress API</a>
         </div>
-      </div>
     </nav>
     <div ng-app='myApp' ng-controller="mainController">
       <div id="wrapper" class="active">
@@ -63,7 +62,7 @@
                                 </select>
                               </div>
                               <div class="panel-body">
-                                <table class="table table-hover">
+                                <table class="table">
                                   <thead>
                                     <tr>
                                       <th>Party</th>
@@ -113,7 +112,7 @@
                                 </div>
                               </div>
                               <div class="panel-body">
-                                <table class="table table-hover">
+                                <table class="table">
                                   <thead>
                                     <tr>
                                       <th>Party</th>
@@ -153,7 +152,7 @@
                                 </div>
                               </div>
                               <div class="panel-body">
-                                <table class="table table-hover">
+                                <table class="table">
                                   <thead>
                                     <tr>
                                       <th>Party</th>
@@ -211,17 +210,13 @@
                                   </tr>
                                   <tr>
                                     <td class="row_height" style="padding: 5px;" id="email_leg">
-                                      <a ng-hide="email_full" href="mailto:{{ detail.oc_email }}">{{ detail.oc_email }}</a>
-                                      <div ng-hide="email_empty">N.A</div>
-                                    </td>
+                                    <a>{{ detail.oc_email }}</a></td>
                                   </tr>
                                   <tr>
                                     <td class="row_height" style="padding: 5px;"> Chamber: 	{{detail.chamber }} </td>
                                   </tr>
                                   <tr>
-                                    <td class="row_height" style="padding: 5px;">
-                                    Contact: <a href="tel:{{ detail.phone }}">{{ 	detail.phone }}</a> 
-                                    </td>
+                                    <td class="row_height" style="padding: 5px;">Contact: {{ 	detail.phone }} </td>
                                   </tr>
                                   <tr>
                                     <td class="row_height" style="padding: 5px;"> <img ng-src="{{ party_image }}" style="width:20%";> 	{{party_name}} </td>
@@ -240,8 +235,8 @@
                                     <td>Term</td>
                                     <td>
                                       <div class="progress">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ term }}" aria-valuemin="0" aria-valuemax="100" ng-style="term_style">
-                                          {{ term }}%
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ term }}" aria-valuemin="0" aria-valuemax="100" style="width:60	%;">
+                                          60%
                                         </div>
                                       </div>
                                     </td>
@@ -256,10 +251,7 @@
                                   </tr>
                                   <tr>
                                     <td class="col-md-2">Fax</td>
-                                    <td class="col-md-4">  
-                                      <a ng-hide="fax_full" href="fax:{{detail.fax}}"> {{detail.fax}} </a>
-                                      <div ng-hide="fax_empty"">N.A</div>
-                                    </td>
+                                    <td class="col-md-4"> {{detail.fax}} </td>
                                   </tr>
                                   <tr>
                                     <td class="col-md-2">Birthday</td>
@@ -268,12 +260,9 @@
                                   <tr>
                                     <td class="col-md-2">Social Links</td>
                                     <td class="col-md-4">
-                                      <a ng-hide="twitter_full" href=" {{twitter}}" target='_blank'><img ng-src='http://cs-server.usc.edu:45678/hw/hw8/images/t.png' style='width:20%';></a>
-                                      <a ng-hide="twitter_empty"></a>
-                                      <a ng-hide="facebook_full" href="{{ facebook }}" target="_blank"><img ng-src="http://cs-server.usc.edu:45678/hw/hw8/images/f.png" style="width:20%";></a>
-                                      <a ng-hide="facebook_empty"></a>
-                                      <a ng-hide="website_full" href="{{ website }}" target="_blank"><img ng-src="http://cs-server.usc.edu:45678/hw/hw8/images/w.png" style="width:20%";></a>
-                                      <a ng-hide="website_empty"></a>
+                                      <a href="{{ twitter }}" target="_blank"><img ng-src="http://	cs-server.usc.edu:45678/hw/hw8/images/t.png	" style="width:20%";	></a>
+                                      <a href="{{ facebook }}" target="_blank"><img ng-src="http://	cs-server.usc.edu:45678/hw/hw8/images/	f.png" style="width:20%";	></a>
+                                      <a href="{{ website }}" target="_blank"><img ng-src="http://	cs-server.usc.edu:45678/hw/hw8/images/w.png	" style="width:20%";	></a>
                                     </td>
                                   </tr>
                                 </table>
@@ -356,7 +345,7 @@
                                 </div>
                               </div>
                               <div class="panel-body">
-                                <table class="table table-hover">
+                                <table class="table">
                                   <thead>
                                     <tr>
                                       <th>Bill ID</th>
@@ -400,7 +389,7 @@
                                 </div>
                               </div>
                               <div class="panel-body">
-                                <table class="table table-hover">
+                                <table class="table">
                                   <thead>
                                     <tr>
                                       <th>Bill ID</th>
@@ -534,7 +523,7 @@
                                 </div> 
                               </div>
                               <div class="panel-body">
-                                <table class="table table-hover">
+                                <table class="table">
                                   <thead>
                                     <tr>
                                       <th></th>
@@ -581,7 +570,7 @@
                                 </div> 
                               </div>
                               <div class="panel-body">
-                                <table class="table table-hover">
+                                <table class="table">
                                   <thead>
                                     <tr>
                                       <th></th>
@@ -622,7 +611,7 @@
                                 </div> 
                               </div>
                               <div class="panel-body">
-                                <table class="table table-hover">
+                                <table class="table">
                                   <thead>
                                     <tr>
                                       <th></th>
@@ -663,7 +652,7 @@
                     <div class="panel panel-default">
                       <div class="panel-body">
                         <ul class="nav nav-tabs">
-                          <li class="active"><a class="no_color" data-toggle="tab" href="#legislator_favorite">Legislators</a></li>
+                          <li class="active"><a class="no_color" data-toggle="tab" hr#legislator_favorite">Legislators</a></li>
                           <li><a class="no_color" data-toggle="tab" href="#bill_favorite">Bills</a></li>
                           <li><a class="no_color" data-toggle="tab" href="#committee_favorite">Committees</a></li>
                         </ul>
@@ -680,7 +669,7 @@
                                     </div>
                                   </div>
                                   <div class="panel-body">
-                                    <table class="table table-hover">
+                                    <table class="table">
                                       <thead>
                                         <tr>
                                           <th></th>
@@ -708,7 +697,7 @@
                                           <td class="col-md-2"> {{legis_fav.state_name}} </td>
                                           <td class="col-md-2"> {{legis_fav.oc_email}} </td>
                                           <td class="col-md-2"> 
-                                            <button class="btn btn-primary" href="carousel-fav-leg" role="button" data-slide="next" ng-click="view_legislator(legis_fav);"> View Details </button>
+                                            <button class="btn btn-primary" href="carousel-fav-leg" role="button" data-slide="next" ng-click="  view_legislator(legis_fav);"> View Details </button>
                                           </td>
                                         </tr>
                                       </tbody>
@@ -791,9 +780,9 @@
                                               <tr>
                                                 <td class="col-md-2">Social Links</td>
                                                 <td class="col-md-4">
-                                                  <a href="{{ twitter }}" target="_blank"><img ng-src="http://cs-server.usc.edu:45678/hw/hw8/images/t.png " style="width:20%";  ></a>
-                                                  <a href="{{ facebook }}" target="_blank"><img ng-src="http://cs-server.usc.edu:45678/hw/hw8/images/f.png" style="width:20%"; ></a>
-                                                  <a href="{{ website }}" target="_blank"><img ng-src="http://cs-server.usc.edu:45678/hw/hw8/images/w.png " style="width:20%";  ></a>
+                                                  <a href="{{ twitter }}" target="_blank"><img ng-src="http://  cs-server.usc.edu:45678/hw/hw8/images/t.png " style="width:20%";  ></a>
+                                                  <a href="{{ facebook }}" target="_blank"><img ng-src="http:// cs-server.usc.edu:45678/hw/hw8/images/  f.png" style="width:20%"; ></a>
+                                                  <a href="{{ website }}" target="_blank"><img ng-src="http://  cs-server.usc.edu:45678/hw/hw8/images/w.png " style="width:20%";  ></a>
                                                 </td>
                                               </tr>
                                             </table>
@@ -803,7 +792,7 @@
                                       <div class="col-md-6">
                                         <h4 class="no-margin">Committees</h4>
                                         <div class="table-responsive">
-                                          <table class="table table-hover">
+                                          <table class="table">
                                             <thead>
                                               <tr>
                                                 <th>Chamber</th>
@@ -859,7 +848,7 @@
                                   </div>
                                 </div>
                                 <div class="panel-body">
-                                  <table class="table table-hover">
+                                  <table class="table">
                                     <thead>
                                       <tr>
                                         <th></th>
@@ -900,7 +889,7 @@
                                   </div>
                                 </div>
                                 <div class="panel-body">
-                                  <table class="table table-hover">
+                                  <table class="table">
                                     <thead>
                                       <tr>
                                         <th></th>
@@ -934,7 +923,7 @@
                   </div>
                 </div>
               </div>
-            </div> <!-- CONTAINER close -->
+            <!-- CONTAINER close -->
           </div>
         </div>
       </div>

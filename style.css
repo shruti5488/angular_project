@@ -1,3 +1,6 @@
+.table-hover > tbody > tr:hover {
+  background-color: #D2D2D2;
+}
 .serif {
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
@@ -11,14 +14,14 @@
 }
 
 .congress_logo {
-    display: block;
-    vertical-align: bottom;
-    padding: 15px 20px;
-    font-weight: 700;
-    font-size: 17px;
-    color: black;
-    background-color: white;
-    width:100%;
+  display: block;
+  vertical-align: bottom;
+  padding: 15px 20px;
+  font-weight: 700;
+  font-size: 17px;
+  color: black;
+  background-color: white;
+  width:100%;
 }
 
 #div_logo{
@@ -30,50 +33,50 @@
 
 
 #logo {
-    height:23px;
-    width: 96px;
+  height:23px;
+  width: 96px;
 }
 
 
 #logo_img {
-    text-decoration: none;
-    color:black;
+  text-decoration: none;
+  color:black;
 }
 
 
 .navbar-header {
-    display: block;
-    float: left;
-    width: 150px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  display: block;
+  float: left;
+  width: 150px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 
 .sidebar-nav {
-    display: block;
-    float: left;
-    width: 150px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  display: block;
+  float: left;
+  width: 150px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 
 
 .sidebar-nav li a {
-    color: #999;
-    display: block;
-    float: left;
-    text-decoration: none;
-    /*width: 50px;*/
-    background-color: black;
-    -webkit-transition: background .5s;
-    -moz-transition: background .5s;
-    -o-transition: background .5s;
-    -ms-transition: background .5s;
-    transition: background .5s;
+  color: #999;
+  display: block;
+  float: left;
+  text-decoration: none;
+  /*width: 50px;*/
+  background-color: black;
+  -webkit-transition: background .5s;
+  -moz-transition: background .5s;
+  -o-transition: background .5s;
+  -ms-transition: background .5s;
+  transition: background .5s;
 }
 
 .sidebar-nav li {
@@ -87,8 +90,8 @@
 }
 
 .pdf_display{
-    width: 500px;
-    height: 550px;
+  width: 500px;
+  height: 550px;
 }
 .no-margin{
 	margin: 0px;
@@ -134,7 +137,7 @@
 .panel-heading{
 background-color: #f5f5f5;
 border-color: #ddd;
-display: inline-flex;
+/*display: inline-flex;*/
     width: 100%;
 }
 .panel-body{
@@ -175,7 +178,6 @@ a{
 }
 .fa-star-o {
   display: inline-block;
-
 }
 .fa-star.yellow {
   display: inline-block;
@@ -184,8 +186,10 @@ a{
   -webkit-text-stroke-color: black;
 }
 .dropdown {
-  /*float: right;*/
   margin-left: auto;
+}
+.select_state{
+  display: inline-flex;;
 }
 .details_icon{
   border: 1px solid gray;
@@ -254,52 +258,51 @@ a{
 @media (max-width: 767px) {
 
   #wrapper {
-  padding-left: 0;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-}
-#wrapper.active {
-  padding-left: 51px;
-}
-#sidebar-wrapper {
-  z-index: 1000;
-  position: fixed;
-  left: 232px;
-  width: 10px;
-  height: 100%;
-  margin-left: -250px;
-  margin-top: 50px;
-  overflow-y: auto;
-  background: #000;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-  overflow-x: hidden;
-}
-#wrapper.active #sidebar-wrapper {
-  width: 50px;
-}
-#page-content-wrapper {
-  width: 107%;
-  position: absolute;
-  padding: 0px;
-  margin-left: 0px;
-}
-#wrapper.active #page-content-wrapper {
-  position: absolute;
-  margin-right: -250px;
-  margin-left: -77px;
-  margin-top: 55px;
-}
-
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+  }
+  #wrapper.active {
+    padding-left: 51px;
+  }
+  #sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 232px;
+    width: 10px;
+    height: 100%;
+    margin-left: -250px;
+    margin-top: 50px;
+    overflow-y: auto;
+    background: #000;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    overflow-x: hidden;
+  }
+  #wrapper.active #sidebar-wrapper {
+    width: 50px;
+  }
+  #page-content-wrapper {
+    width: 107%;
+    position: absolute;
+    padding: 0px;
+    margin-left: 0px;
+  }
+  #wrapper.active #page-content-wrapper {
+    position: absolute;
+    margin-right: -250px;
+    margin-left: -77px;
+    margin-top: 55px;
+  }
 }
 
 @media (min-width: 1200px){
-.container {
-    width: 100%;
-}
+  .container {
+      width: 100%;
+  }
 }
 
