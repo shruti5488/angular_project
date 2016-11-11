@@ -18,14 +18,19 @@ app.controller('mainController', function($scope, $http){
                     'Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York',
                     'North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota',
                     'Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'];
-         
+    
+      $scope.reset_state = function(){
+        if($scope.boxmodel==null) {
+          delete $scope.boxmodel;
+        }
+      }
+
     $scope.currentPage = 1;
     $scope.pageSize = 10;
     $http({
       method: 'GET',
       url: 'logic.php',
     }).then(function (response) {
-      debugger;
       var json_leg = JSON.parse(response.data[0]);
       var json_bill_dis_active = JSON.parse(response.data[1]);
       var json_bill_dis_new = JSON.parse(response.data[2]);
@@ -125,6 +130,7 @@ app.controller('mainController', function($scope, $http){
     }
     $scope.legislator_favbar = [];
     $scope.toggle_leg = function (index, leg_fav) {
+      debugger;
       var flag = true;
       var pic_url, chamber_pic; 
       leg_fav.fav = true;
@@ -134,6 +140,9 @@ app.controller('mainController', function($scope, $http){
         for(var k=0; k<fav_legislator.length; k++) {
           if (fav_legislator[k].bioguide_id === leg_fav.bioguide_id) {
             flag = false;
+            $scope.legislator_favbar.splice(index, 1);     
+            localStorage.setItem("legislator_storage", JSON.stringify($scope.legislator_favbar));  
+            leg_fav.fav = false;
           }
         }
       }
@@ -230,6 +239,9 @@ app.controller('mainController', function($scope, $http){
         for(var k=0; k<fav_bill.length; k++) {
           if (fav_bill[k].bill_id === bill_fav.bill_id) {
             flag = false;
+            $scope.bill_favbar.splice(index, 1);     
+            localStorage.setItem("bill_storage", JSON.stringify($scope.bill_favbar)); 
+            bill_fav.fav = false;
           }
         }
       }
@@ -327,6 +339,9 @@ app.controller('mainController', function($scope, $http){
         for(var k=0; k<fav_committee.length; k++) {
           if (fav_committee[k].committee_id === comm_house.committee_id) {
             flag = false;
+            $scope.committee_favbar.splice(index, 1);     
+            localStorage.setItem("committee_storage", JSON.stringify($scope.committee_favbar));
+            comm_house.fav = false;
           }
         }
       }
@@ -367,7 +382,6 @@ app.controller('mainController', function($scope, $http){
     
     $scope.view_legislator = function(legislator_details) {      
       $scope.detail = legislator_details;
-      
       var str = "string";
       var bioguide_id = legislator_details.bioguide_id;
       $http({
@@ -410,7 +424,6 @@ app.controller('mainController', function($scope, $http){
       }, function (response) {
         // code to execute in case of error
       });
-      debugger;
       $scope.photo = "https://theunitedstates.io/images/congress/original/" + legislator_details.bioguide_id + ".jpg";
       
       if (legislator_details.fax === null || legislator_details.fax === undefined) {
