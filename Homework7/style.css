@@ -121,14 +121,7 @@
 .reduce_panel{
   margin: 15px;
 }
-#details_leg{
-  padding-left: 40px;
-  width: 95%;
-}
-.details_fav{
-  padding-left: 10px;
-  width: 92%;
-}
+
 .view_details_style{
   display: inline-flex;
   width: 100%;
@@ -202,15 +195,7 @@ a{
 .select_state{
   display: inline-flex;;
 }
-.details_icon{
-  border: 1px solid gray;
-  width: 32px;    
-  border-radius: 2px;
-  margin: 6px 3px 3px;
-  height: 27px;
-  outline: 0;
-  background: none !important;
-}
+
 .party_fav{
   width:25px;
 }
@@ -264,6 +249,23 @@ a{
   }
 .pic_fav{
   width:50%;
+}
+#details_leg{
+  padding-left: 50px;
+  width: 95%;
+}
+.details_icon{
+  border: 1px solid gray;
+  width: 32px;    
+  border-radius: 2px;
+  margin: 8px 3px 3px 15px;
+  height: 27px;
+  outline: 0;
+  background: none !important;
+}
+.details_fav{
+  padding-left: 50px;
+  width: 95%;
 }
 }
 
@@ -325,7 +327,23 @@ a{
 .table-responsive>.table>tbody>tr>td {
   white-space: initial;
 }
-
+#details_leg{
+  padding-left: 50px;
+  width: 85%;
+}
+.details_icon{
+  border: 1px solid gray;
+  width: 32px;    
+  border-radius: 2px;
+  margin: 8px 3px 3px 15px;
+  height: 27px;
+  outline: 0;
+  background: none !important;
+}
+.details_fav{
+  padding-left: 7px;
+  width: 70%;
+}
 }
 
 @media (min-width: 1200px){

@@ -44,8 +44,8 @@ app.controller('mainController', function($scope, $http){
       var json_com_senate = JSON.parse(response.data[4]);
       var json_com_joint = JSON.parse(response.data[5]);
       
-      $scope.house = "http://cs-server.usc.edu:45678/hw/hw8/images/h.png";
-      $scope.senate = "http://cs-server.usc.edu:45678/hw/hw8/images/s.svg";
+      $scope.house = "h.png";
+      $scope.senate = "s.svg";
       $scope.new_bills  = json_bill_dis_active.results;
       $scope.active_bills = json_bill_dis_new.results;
       $scope.legs = json_leg.results;
@@ -83,10 +83,10 @@ app.controller('mainController', function($scope, $http){
       var district;
       for(var i=0; i<$scope.legs.length; i++) {
         if ($scope.legs[i].party === "R"){
-          $scope.legs[i].party_image = "http://cs-server.usc.edu:45678/hw/hw8/images/r.png";
+          $scope.legs[i].party_image = "r.png";
         }
         else if ($scope.legs[i].party === "D"){
-          $scope.legs[i].party_image = "http://cs-server.usc.edu:45678/hw/hw8/images/d.png";
+          $scope.legs[i].party_image = "d.png";
         }
         else {
           $scope.legs[i].party_image = "http://independentamericanparty.org/wp-content/themes/v/images/logo-american-heritage-academy.png";
@@ -178,19 +178,19 @@ app.controller('mainController', function($scope, $http){
       {
         pic_url = "https://theunitedstates.io/images/congress/original/" + leg_fav.bioguide_id + ".jpg";
         if (leg_fav.party=="R"){
-          party_symb = "http://cs-server.usc.edu:45678/hw/hw8/images/r.png";
+          party_symb = "r.png";
         }
         else if (leg_fav.party == "D"){
-         party_symb = "http://cs-server.usc.edu:45678/hw/hw8/images/d.png";
+         party_symb = "d.png";
         }
         else if (leg_fav.party == "I"){
           party_symb = "http://independentamericanparty.org/wp-content/themes/v/images/logo-american-heritage-academy.png";
         }
         if (leg_fav.chamber=="house"){
-          chamber_pic = "http://cs-server.usc.edu:45678/hw/hw8/images/h.png";
+          chamber_pic = "h.png";
         } 
         else {
-           chamber_pic = "http://cs-server.usc.edu:45678/hw/hw8/images/s.svg";
+           chamber_pic = "s.svg";
         }
         leg_fav.pic_url = pic_url;
         leg_fav.party_symb = party_symb;
@@ -275,10 +275,10 @@ app.controller('mainController', function($scope, $http){
       if (flag === true)
       {
         if (bill_fav.chamber=="house"){
-          chamber_pic = "http://cs-server.usc.edu:45678/hw/hw8/images/h.png";
+          chamber_pic = "h.png";
         } 
         else {
-           chamber_pic = "http://cs-server.usc.edu:45678/hw/hw8/images/s.svg";
+           chamber_pic = "s.svg";
         }
         bill_fav.chamber_pic = chamber_pic;
         $scope.bill_favbar.push(bill_fav);
@@ -381,10 +381,10 @@ app.controller('mainController', function($scope, $http){
       if (flag === true)
       {       
         if (comm_house.chamber=="house"){
-          chamber_pic = "http://cs-server.usc.edu:45678/hw/hw8/images/h.png";
+          chamber_pic = "h.png";
         } 
         else {
-          chamber_pic = "http://cs-server.usc.edu:45678/hw/hw8/images/s.svg";
+          chamber_pic = "s.svg";
         }
         comm_house.chamber_pic = chamber_pic;
         $scope.committee_favbar.push(comm_house);
@@ -444,10 +444,10 @@ app.controller('mainController', function($scope, $http){
       $http({
         method: 'POST',
         url: 'index.php',
-        params: { 
-          operation: "leg_viewdetail",
-          bioguide : bioguide_id
-        } 
+          params: { 
+            operation: "leg_viewdetail",
+            bioguide : bioguide_id
+          } 
       }).then(function (response) {
         var json_leg_comm = JSON.parse(response.data[0]);
         var json_leg_bill = JSON.parse(response.data[1]);
@@ -516,11 +516,11 @@ app.controller('mainController', function($scope, $http){
       
       if (legislator_details.party == "R"){
         $scope.party_name = "Republican";
-        $scope.party_image = "http://cs-server.usc.edu:45678/hw/hw8/images/r.png";
+        $scope.party_image = "r.png";
       }
       else if (legislator_details.party == "D"){
         $scope.party_name = "Democrat";
-        $scope.party_image = "http://cs-server.usc.edu:45678/hw/hw8/images/d.png";
+        $scope.party_image = "d.png";
       }
       else {
         $scope.party_name = "Independent";

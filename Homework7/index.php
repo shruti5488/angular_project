@@ -1,15 +1,15 @@
 <?php
 
-	$data = json_decode(file_get_contents("php://input"));
+	// $data = json_decode(file_get_contents("php://input"));
     
     if($_GET['operation'] === "legislators") {
-    	$start_url_leg = "http://104.198.0.197:8080/legislators?apikey=c401bf0c6bee4abcae170e8225dce1fe&per_page=all";
+    	$start_url_leg = "http://104.198.0.197:8080/legislators?apikey=dc64b50ea0094b8794a3a8d96db12f86&per_page=all";
 		$json_string_leg = file_get_contents($start_url_leg);
 		echo json_encode($json_string_leg);
     }
 
     else if($_GET['operation'] === "legislators_bill_committee"){
-    	$start_url_leg = "http://104.198.0.197:8080/legislators?apikey=c401bf0c6bee4abcae170e8225dce1fe&per_page=all";
+    	$start_url_leg = "http://104.198.0.197:8080/legislators?apikey=dc64b50ea0094b8794a3a8d96db12f86&per_page=all";
 		$json_string_leg = file_get_contents($start_url_leg);
 	
 		$start_url_bill_active = "http://104.198.0.197:8080/bills?history.active=false&apikey=dc64b50ea0094b8794a3a8d96db12f86&per_page=50&last_version.urls.pdf__exists=true";
