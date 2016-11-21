@@ -264,8 +264,8 @@ a{
   background: none !important;
 }
 .details_fav{
-  padding-left: 50px;
-  width: 95%;
+  padding-left: 10px;
+  width: 91%;
 }
 }
 
@@ -342,7 +342,7 @@ a{
 }
 .details_fav{
   padding-left: 7px;
-  width: 70%;
+  width: 70 %;
 }
 }
 
